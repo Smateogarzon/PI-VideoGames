@@ -22,6 +22,11 @@ module.exports = (sequelize) => {
             msg: 'El campo "name" no puede estar vacío.',
           },
         },
+        beforeValidate: function (user) {
+          if (user.name) {
+            user.name = user.name.toLowerCase();
+          }
+        },
       },
       description: {
         type: DataTypes.TEXT,

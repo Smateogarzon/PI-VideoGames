@@ -9,7 +9,10 @@ module.exports = (sequalize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      name: {type: DataTypes.STRING, allowNull: false},
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       timestamps: false,

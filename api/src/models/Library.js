@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  const videogame = sequelize.define(
-    "videogame",
+  const library = sequelize.define(
+    "library",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -20,44 +20,24 @@ module.exports = (sequelize) => {
             msg: 'El campo "name" no puede estar vacío.',
           },
         },
-        beforeValidate: function (user) {
-          if (user.name) {
-            user.name = user.name.toLowerCase();
-          }
-        },
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: 'El campo "description" no puede ser nulo.',
-          },
-          notEmpty: {
-            msg: 'El campo "description" no puede estar vacío.',
-          },
-        },
       },
       platforms: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false,
+
         defaultValue: [],
       },
       genres: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false,
+
         defaultValue: [],
       },
       background_image: {
         type: DataTypes.STRING,
-        allowNull: false,
+
         validate: {
-          notNull: {
-            msg: 'El campo "image" no puede ser nulo.',
-          },
-          notEmpty: {
-            msg: 'El campo "image" no puede estar vacío.',
-          },
           isUrl: {
             msg: 'El campo "image" debe ser una URL válida.',
           },
@@ -65,14 +45,8 @@ module.exports = (sequelize) => {
       },
       background_image_additional: {
         type: DataTypes.STRING,
-        allowNull: false,
+
         validate: {
-          notNull: {
-            msg: 'El campo "image" no puede ser nulo.',
-          },
-          notEmpty: {
-            msg: 'El campo "image" no puede estar vacío.',
-          },
           isUrl: {
             msg: 'El campo "image" debe ser una URL válida.',
           },
@@ -89,7 +63,7 @@ module.exports = (sequelize) => {
       },
       rating: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+
         defaultValue: 0,
       },
     },
@@ -97,5 +71,6 @@ module.exports = (sequelize) => {
       timestamps: false,
     }
   );
-  return videogame;
+
+  return library;
 };

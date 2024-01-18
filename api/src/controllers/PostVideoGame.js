@@ -1,14 +1,14 @@
-const {videogame, plataforms, generes} = require('../db');
+const { videogame, plataforms, generes } = require("../db");
 
 async function postVideoGame(req, res) {
   try {
-    const equal = await videogame.findOne({where: {name: req.body.name}});
+    const equal = await videogame.findOne({ where: { name: req.body.name } });
     console.log(equal);
     if (equal) {
-      throw new Error('Ya existe el videojuego');
+      throw new Error("Ya existe el videojuego");
     }
     const platformsArray = req.body.platforms.map(
-      (platform) => platform.platform['name'],
+      (platform) => platform.platform["name"]
     );
     const generesArray = req.body.genres.map((genre) => genre.name);
 
@@ -22,23 +22,23 @@ async function postVideoGame(req, res) {
     } = req.body;
 
     const requiredFields = [
-      'name',
-      'description',
-      'background_image',
-      'released',
-      'rating',
-      'background_image_additional',
+      "name",
+      "description",
+      "background_image",
+      "released",
+      "background_image_additional",
     ];
     const missingFields = requiredFields.filter((field) => !req.body[field]);
 
     if (
       missingFields.length > 0 ||
       platformsArray.length === 0 ||
-      generesArray.length === 0
+      generesArray.length === 0 ||
+      req.body.rating < 0
     ) {
       return res
         .status(400)
-        .send(`Faltan campos obligatorios: ${missingFields.join(', ')}`);
+        .send(`Faltan campos obligatorios: ${missingFields.join(", ")}`);
     }
 
     const createGenres = generesArray.map(async (genre) => {
@@ -70,7 +70,7 @@ async function postVideoGame(req, res) {
       },
     });
     if (!created) {
-      return res.status(400).send('El videojuego ya existe');
+      return res.status(400).send("El videojuego ya existe");
     }
 
     const generesInstances = await generes.findAll({
@@ -89,12 +89,12 @@ async function postVideoGame(req, res) {
 
     await createVideogame.addGeneres(generesInstances);
     await createVideogame.addPlataforms(platformsInstances);
-    await createVideogame.update({platforms: platformNames});
-    await createVideogame.update({genres: generesNames});
-    res.status(200).json(await videogame.findOne({where: {name: name}}));
+    await createVideogame.update({ platforms: platformNames });
+    await createVideogame.update({ genres: generesNames });
+    res.status(200).json(await videogame.findOne({ where: { name: name } }));
   } catch (error) {
-    console.error('Error al crear el videojuego:', error.message);
-    res.status(500).send('Error interno del servidor');
+    console.error("Error al crear el videojuego:", error.message);
+    res.status(500).send("Error interno del servidor");
   }
 }
 

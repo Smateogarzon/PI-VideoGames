@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize");
+const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) => {
   const videogame = sequelize.define(
-    "videogame",
+    'videogame',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -65,14 +65,8 @@ module.exports = (sequelize) => {
       },
       background_image_additional: {
         type: DataTypes.STRING,
-        allowNull: false,
+
         validate: {
-          notNull: {
-            msg: 'El campo "image" no puede ser nulo.',
-          },
-          notEmpty: {
-            msg: 'El campo "image" no puede estar vacío.',
-          },
           isUrl: {
             msg: 'El campo "image" debe ser una URL válida.',
           },
@@ -95,7 +89,7 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false,
-    }
+    },
   );
   return videogame;
 };

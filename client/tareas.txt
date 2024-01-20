@@ -1,0 +1,1 @@
+en sing_up falta poner la decoracion de accesos;

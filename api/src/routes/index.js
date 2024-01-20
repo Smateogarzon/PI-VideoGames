@@ -17,7 +17,7 @@ router.get('/videogames_user', getUserVideoGames);
 router.get('/videogames/:id', getVideogame);
 router.get('/genres', getGenres);
 router.get('/videogames', getNameVideoGame);
-router.get('/login', login);
+router.post('/login', login);
 router.post('/create_videogames', postVideoGame);
 router.post('/create_user', PostUser);
 router.post('/add_library/:id', postLibrary);

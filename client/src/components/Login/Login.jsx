@@ -1,17 +1,19 @@
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {access} from '../../Redux/actions';
 
 export default function login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [log, setLog] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  const [access, setAccess] = useState(false);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const {name, value} = event.target;
     setLog((prevLogin) => ({
       ...prevLogin,
       [name]: value,
@@ -21,14 +23,13 @@ export default function login() {
   const submmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(log);
-      const { data } = await axios.post("http://localhost:3001/login", log);
+      const {data} = await axios.post('http://localhost:3001/login', log);
       if (data.access === true) {
         setLog({
-          email: "",
-          password: "",
+          email: '',
+          password: '',
         });
-        setAccess(true);
+        dispatch(access(true));
       }
     } catch (error) {
       console.error(error);

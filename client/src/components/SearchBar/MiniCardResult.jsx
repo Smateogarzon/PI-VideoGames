@@ -7,6 +7,7 @@ import {IoLogoAndroid} from 'react-icons/io';
 import {FaLinux} from 'react-icons/fa6';
 import {SiWii} from 'react-icons/si';
 import {SiAtari} from 'react-icons/si';
+import styles from './MiniCardResult.module.css';
 
 export default function MiniCardResult(props) {
   const logsPlatforms = {
@@ -39,21 +40,20 @@ export default function MiniCardResult(props) {
     props.platforms.length > 4 ? props.platforms.length - 4 : false;
 
   return (
-    <div style={{backgroundColor: 'red'}}>
-      <div>
-        <img
-          src={props.image}
-          alt={props.name}
-          style={{maxWidth: '150px', maxHeight: '300px'}}
-        />
+    <div className={styles.containerResult}>
+      <div className={styles.containerImg}>
+        <img src={props.image} alt={props.name} />
       </div>
-      <div>
-        {renderIconArray.map((icon, i) => (
-          <span key={i}>{icon}</span>
-        ))}
-        {morPlatforms && <span>+{morPlatforms}</span>}
+      <div className={styles.containerText}>
+        <div className={styles.containerIcons}>
+          {renderIconArray.map((icon, i) => (
+            <span key={i}>{icon}</span>
+          ))}
+          {morPlatforms && <span>+{morPlatforms}</span>}
+        </div>
+
+        <h5>{props.name}</h5>
       </div>
-      <h5>{props.name}</h5>
     </div>
   );
 }

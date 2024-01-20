@@ -1,0 +1,30 @@
+.containerResult {
+  display: flex;
+  width: 25%;
+}
+
+.containerImg img {
+  width: 36px;
+  height: 47px;
+  margin-right: 8px;
+  border-radius: 10px;
+}
+
+.containerText {
+  display: flex;
+  flex-direction: column;
+}
+.containerIcons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.containerText span {
+  margin-right: 5px;
+  gap: 15px;
+  font-size: 20px;
+}
+
+.containerText h5 {
+  margin-top: 10px;
+}

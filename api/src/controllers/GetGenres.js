@@ -14,14 +14,16 @@ async function getGenres(req, res) {
     // Si hay menos de 19 géneros en la base de datos, obtenerlos de la API externa y guardarlos
     if (count < 19) {
       const {data} = await axios(`${URL_GETGENRES}?key=${API_KEY}`);
+
       data.results.forEach((genre) => {
-        generesArray.push({name: genre.name});
+        generesArray.push({name: genre.name, Image: genre.image_background});
       });
 
       // Crear o actualizar los géneros en la base de datos
+
       for (const genreData of generesArray) {
         await generes.findOrCreate({
-          where: {name: genreData.name},
+          where: {name: genreData.name, image: genreData.Image},
         });
       }
     }

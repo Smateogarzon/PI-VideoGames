@@ -1,13 +1,17 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import SearchResults from "./SearchResults";
-import styles from "./SearchBar.module.css";
+import axios from 'axios';
+import {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
+import {access} from '../../Redux/actions';
+import SearchResults from './SearchResults';
+import styles from './SearchBar.module.css';
 
 export default function searchBar() {
-  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch();
+  const [searchValue, setSearchValue] = useState('');
   const [results, setResults] = useState([]);
   const [cancelToken, setCancelToken] = useState(null);
+  const admision = useSelector((state) => state.access);
 
   useEffect(() => {
     return () => {
@@ -20,7 +24,7 @@ export default function searchBar() {
 
   const handleChange = async (event) => {
     try {
-      const { value } = event.target;
+      const {value} = event.target;
       setSearchValue(value);
 
       // Cancelar la solicitud anterior
@@ -32,9 +36,9 @@ export default function searchBar() {
       const newCancelToken = axios.CancelToken.source();
       setCancelToken(newCancelToken);
 
-      const { data } = await axios.get(
+      const {data} = await axios.get(
         `http://localhost:3001/videogames/?name=${value}`,
-        { withCredentials: true, cancelToken: newCancelToken.token }
+        {withCredentials: true, cancelToken: newCancelToken.token},
       );
 
       setResults(data);
@@ -48,40 +52,43 @@ export default function searchBar() {
 
   const pressKeys = (event) => {
     if (event.altKey && event.ctrlKey) {
-      if (document.activeElement.tagName !== "INPUT") {
-        document.getElementById("search-bar").focus();
+      if (document.activeElement.tagName !== 'INPUT') {
+        document.getElementById('search-bar').focus();
       }
     }
   };
 
   const logout = async () => {
     try {
-      const { data } = await axios.post("http://localhost:3001/logout");
-      console.log(data);
+      const {data} = await axios.post('http://localhost:3001/logout');
+      dispatch(access(false));
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", pressKeys);
+    document.addEventListener('keydown', pressKeys);
     return () => {
-      document.removeEventListener("keydown", pressKeys);
+      document.removeEventListener('keydown', pressKeys);
     };
   }, []);
 
   return (
     <div className={styles.containerSearch}>
       <div className={styles.containerSearchBar}>
-        <input
-          autoComplete="off"
-          type="search"
-          id="search-bar"
-          value={searchValue}
-          placeholder={" Search +800,000 games"}
-          onChange={handleChange}
-        />
-        {results.length > 0 && <SearchResults data={results} />}
+        <div className={styles.containerInput}>
+          <input
+            autoComplete="off"
+            type="search"
+            id="search-bar"
+            value={searchValue}
+            placeholder={' Search +800,000 games'}
+            onChange={handleChange}
+          />
+          {results.length > 0 && <SearchResults data={results} />}
+        </div>
+
         <div className={styles.containerKey}>
           <div>alt</div>
           <span>+</span>
@@ -89,18 +96,22 @@ export default function searchBar() {
         </div>
       </div>
 
-      <div className={styles.containerSession}>
-        <Link to={"/login"} style={{ textDecoration: "none" }}>
-          <span>LOG IN</span>
-        </Link>
+      {!admision && (
+        <div className={styles.containerSession}>
+          <Link to={'/login'} style={{textDecoration: 'none'}}>
+            <span>LOG IN</span>
+          </Link>
 
-        <Link to={"/sing_up"} style={{ textDecoration: "none" }}>
-          <span>SING UP</span>
-        </Link>
-      </div>
-      <div>
-        <button onClick={logout}>Log Out</button>
-      </div>
+          <Link to={'/sing_up'} style={{textDecoration: 'none'}}>
+            <span>SING UP</span>
+          </Link>
+        </div>
+      )}
+      {admision && (
+        <div>
+          <button onClick={logout}>Log Out</button>
+        </div>
+      )}
     </div>
   );
 }

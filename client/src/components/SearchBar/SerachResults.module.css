@@ -1,0 +1,11 @@
+.containerResults {
+  position: absolute;
+  width: 96.5%;
+  display: flex;
+  flex-direction: column;
+  top: 100%;
+  z-index: 2;
+  background-color: black;
+  border-radius: 20px;
+  padding-inline: 20px;
+}

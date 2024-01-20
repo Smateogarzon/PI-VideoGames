@@ -1,5 +1,4 @@
 .containerSearch {
-  margin-top: 1.5%;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -14,22 +13,28 @@
 .containerSearchBar input:focus + .containerKey {
   opacity: 0;
 }
-
 .containerSearchBar {
-  position: relative;
   display: flex;
-  width: 70%;
+  width: 80%;
+  position: relative;
 }
-
-.containerSearchBar input {
+.containerInput {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  position: relative;
+}
+.containerInput input {
   width: 100%;
   height: 70%;
   overflow: hidden;
   border-radius: 25px;
   background-color: rgb(118, 118, 118);
   border-color: rgba(190, 20, 20, 0.788);
+  position: relative;
 }
-.containerSearchBar input::placeholder {
+
+.containerInput input::placeholder {
   color: #acacac;
   text-indent: 3%;
   font-size: 15px;
@@ -40,7 +45,7 @@
   color: #acacac;
   position: absolute;
   display: flex;
-  top: 14%;
+  top: 15%;
   right: 7%;
   z-index: 1;
   gap: 15%;
@@ -55,13 +60,20 @@
 
 .containerSession {
   display: flex;
-  justify-content: space-between;
+  width: 20%;
+  justify-content: space-around;
   align-items: center;
   margin-bottom: 1.7%;
-  gap: 15px;
+  margin-right: 3%;
+  padding-top: 1%;
+  gap: 10px;
 }
 .containerSession span {
   color: white;
   font-weight: bold;
-  font-size: 110%;
+  font-size: 15px;
+}
+
+.containerSession span:hover {
+  border-bottom: 2px solid white;
 }

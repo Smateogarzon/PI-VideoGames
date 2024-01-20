@@ -13,6 +13,15 @@ module.exports = (sequalize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      image: {
+        type: DataTypes.STRING,
+
+        validator: {
+          isUrl: {
+            msg: 'El campo "image" debe ser una URL válida.',
+          },
+        },
+      },
     },
     {
       timestamps: false,

@@ -23,7 +23,7 @@ async function getNameVideoGame(req, res) {
               [Op.iLike]: `%${name}%`,
             },
           },
-          limit: 5,
+          limit: 10,
         });
 
         if (nameDb.length === 0) {
@@ -78,7 +78,7 @@ const getNameApi = async (name) => {
     }
 
     // Mapear los nombres encontrados en la API externa
-    const firstElement = data.results.slice(0, 5).map((game) => ({
+    const firstElement = data.results.slice(0, 10).map((game) => ({
       id: game.id,
       name: game.name,
       image: game.background_image,

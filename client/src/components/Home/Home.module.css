@@ -1,0 +1,10 @@
+.containerHome {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+.sectionHome {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}

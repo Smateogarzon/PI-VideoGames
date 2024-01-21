@@ -1,8 +1,10 @@
 import SeccionFilters from './quickAccessFilters/seccionFilters';
+import styles from './Home.module.css';
+
 export default function Home() {
   return (
-    <div>
-      <section>
+    <div className={styles.containerHome}>
+      <section className={styles.sectionHome}>
         <SeccionFilters />
       </section>
       <section>

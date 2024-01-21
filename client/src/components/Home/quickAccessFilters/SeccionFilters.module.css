@@ -1,0 +1,78 @@
+.seccionFilters {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  width: 100%;
+  position: relative;
+  padding-right: 6px;
+}
+.seccionFilters::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin-top: 60%;
+  width: 2px;
+  height: 85%;
+  background-color: rgb(192, 192, 192);
+}
+.containerFilters {
+  display: flex;
+  flex-direction: column;
+}
+.containerFilters ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  gap: 5px;
+}
+.containerFilters > ul > li {
+  width: 100%;
+  display: flex;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  gap: 10px;
+}
+.show {
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  text-align: center;
+  opacity: 0.6;
+}
+.show span {
+  width: 36px;
+  height: 37px;
+  font-size: 26px;
+  text-align: center;
+  border: 2px solid rgb(71, 71, 71);
+  border-radius: 10px;
+}
+.show:hover span {
+  background-color: rgb(71, 71, 71);
+}
+.show p {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  padding-top: 2px;
+}
+.containerFilters .byName {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.byName span {
+  width: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  text-align: center;
+  border: 2px solid rgb(71, 71, 71);
+  border-radius: 10px;
+}

@@ -103,7 +103,7 @@ export default function searchBar() {
           </Link>
 
           <Link to={'/sing_up'} style={{textDecoration: 'none'}}>
-            <span>SING UP</span>
+            <span>SIGN UP</span>
           </Link>
         </div>
       )}

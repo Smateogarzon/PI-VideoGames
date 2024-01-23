@@ -1,7 +1,7 @@
-import { ACCESS, IDRANDOM } from "./types";
-import axios from "axios";
-import store from "./store";
-import { LuHourglass } from "react-icons/lu";
+import {ACCESS, IDRANDOM} from './types';
+import axios from 'axios';
+import store from './store';
+import {LuHourglass} from 'react-icons/lu';
 
 export function access(payload) {
   return {
@@ -20,10 +20,10 @@ async function dataCard(memoriPag, payload) {
 
   while (retries > 0 && arrayPag.length !== 3) {
     try {
-      const { data } = await axios(
-        `http://localhost:3001/videogames/${numRandom()}`
+      const {data} = await axios(
+        `http://localhost:3001/videogames/${numRandom()}`,
       );
-      arrayPag.push({ data });
+      arrayPag.push({data});
       memoriPag[payload] = arrayPag;
       retries = 3;
     } catch (error) {

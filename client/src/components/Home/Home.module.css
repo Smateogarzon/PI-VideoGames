@@ -1,10 +1,19 @@
 .containerHome {
   display: flex;
   width: 100%;
-  position: relative;
+  gap: 5%;
 }
 .sectionHome {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
+}
+
+.sectionHome2 {
+  display: flex;
+  flex-direction: column;
+}
+.containerCards {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }

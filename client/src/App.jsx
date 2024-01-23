@@ -1,17 +1,28 @@
-import {useState} from 'react';
-import {Routes, Route, Link} from 'react-router-dom';
-import SearchBar from './components/SearchBar/SearchBar';
-import SingUp from './components/Sin_Up/Sign_Up';
-import Login from './components/Login/Login';
-import Home from './components/Home/Home';
-import styles from './App.module.css';
+import { useState, useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { idRandom } from "./Redux/actions";
+import SearchBar from "./components/SearchBar/SearchBar";
+import SingUp from "./components/Sin_Up/Sign_Up";
+import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
+import styles from "./App.module.css";
 
 function App() {
+  const dispatch = useDispatch();
+  const onSearch = (numPag) => {
+    console.log(numPag);
+    dispatch(idRandom(numPag));
+  };
+  useEffect(() => {
+    onSearch(1);
+  }, []);
+
   return (
     <div className={styles.containerApp}>
       <header className={styles.header}>
         <div className={styles.containerHeaderH1}>
-          <Link to={'/'} style={{textDecoration: 'none', color: 'white'}}>
+          <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
             <h1> GamerFile</h1>
           </Link>
         </div>
@@ -19,7 +30,7 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home onSearch={onSearch} />} />
           <Route path="/sing_up" element={<SingUp />} />
           <Route path="/login" element={<Login />} />
         </Routes>

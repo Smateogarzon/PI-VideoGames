@@ -5,9 +5,10 @@
   width: 100%;
   position: relative;
   padding-right: 6px;
+  cursor: pointer;
 }
 .seccionFilters::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;

@@ -1,1 +1,2 @@
-export const ACCESS = 'ACCESS';
+export const ACCESS = "ACCESS";
+export const IDRANDOM = "IDRANDOM";

@@ -1,0 +1,8 @@
+.containerCardsP {
+  width: 100%;
+}
+.containerCards {
+  display: flex;
+  gap: 3%;
+  width: 100%;
+}

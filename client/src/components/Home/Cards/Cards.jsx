@@ -1,14 +1,14 @@
-import {useSelector} from 'react-redux';
-import {useEffect, useState} from 'react';
-import Card from './Card';
-import {SlArrowRight, SlArrowLeft} from 'react-icons/sl';
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import Card from "./Card";
+import { SlArrowRight, SlArrowLeft } from "react-icons/sl";
 
-import styles from './Cards.module.css';
+import styles from "./Cards.module.css";
 
-export default function cards({onSearch}) {
+export default function cards({ onSearch }) {
   const [numPag, setNumPag] = useState(1);
   const [renderPag, setRenderPag] = useState([]);
-  const paginationArray = Array.from({length: 10}, (_, i) => i);
+  const paginationArray = Array.from({ length: 10 }, (_, i) => i);
   const memoriPag = useSelector((state) => state.pag);
 
   useEffect(() => {
@@ -56,7 +56,8 @@ export default function cards({onSearch}) {
           onClick={() => {
             setNumPag(numPag - 1);
             onSearch(numPag - 1);
-          }}>
+          }}
+        >
           <SlArrowLeft />
           <SlArrowLeft />
         </button>
@@ -64,11 +65,12 @@ export default function cards({onSearch}) {
           {paginationArray.map((e) => (
             <li key={e}>
               <button
-                className={e + 1 === numPag ? styles.activeButton : ''}
+                className={e + 1 === numPag ? styles.activeButton : ""}
                 onClick={() => {
                   onSearch(e + 1);
                   setNumPag(e + 1);
-                }}>
+                }}
+              >
                 {e + 1}
               </button>
             </li>
@@ -80,7 +82,8 @@ export default function cards({onSearch}) {
           onClick={() => {
             setNumPag(numPag + 1);
             onSearch(numPag + 1);
-          }}>
+          }}
+        >
           <SlArrowRight />
           <SlArrowRight />
         </button>

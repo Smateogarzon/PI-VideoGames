@@ -1,9 +1,16 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {platform, deletePlatform} from '../../../Redux/actions';
+import {
+  platform,
+  deletePlatform,
+  genres,
+  deleteGenres,
+} from '../../../Redux/actions';
+import {Genres} from '../../../assets/genres';
 
 export default function CreataeVideoG() {
   const dispatch = useDispatch();
   const createPlatform = useSelector((state) => state.platforms);
+  const createGenres = useSelector((state) => state.genres);
 
   const handlePlatforms = (event) => {
     const {value} = event.target;
@@ -13,15 +20,30 @@ export default function CreataeVideoG() {
     const {textContent} = event.target;
     dispatch(deletePlatform(textContent));
   };
+  const handleGenres = (event) => {
+    const {value} = event.target;
+    dispatch(genres(value));
+  };
+  const deleteGenre = (event) => {
+    dispatch(deleteGenres(event.target.textContent));
+  };
   return (
     <div>
       <form>
         <label htmlFor="name">name</label>
-        <input type="text" name="name" />
+        <input type="text" id="name" name="name" />
         <label htmlFor="description">description</label>
-        <textarea name="description" cols="30" rows="10"></textarea>
+        <textarea
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"></textarea>
         <label htmlFor="platforms">add Platforms:</label>
-        <select name="platforms" onChange={handlePlatforms} defaultValue="add">
+        <select
+          name="platforms"
+          id="platforms"
+          onChange={handlePlatforms}
+          defaultValue="add">
           <option value={'add'} disabled={true}>
             Select platforms
           </option>
@@ -64,6 +86,31 @@ export default function CreataeVideoG() {
           {createPlatform.map((platform, index) => (
             <span key={index} onClick={deletePlatforms}>
               {platform}{' '}
+            </span>
+          ))}
+        </div>
+        <label htmlFor="genres">Add Genres:</label>
+        <select
+          name="genres"
+          id="genres"
+          onChange={handleGenres}
+          defaultValue="add">
+          <option value="add" disabled={true}>
+            Select Genres
+          </option>
+          {Genres.map((genre, index) => (
+            <option
+              key={index}
+              value={genre}
+              disabled={createGenres.includes(genre)}>
+              {genre}
+            </option>
+          ))}
+        </select>
+        <div>
+          {createGenres.map((genre, index) => (
+            <span key={index} onClick={deleteGenre}>
+              {genre}{' '}
             </span>
           ))}
         </div>

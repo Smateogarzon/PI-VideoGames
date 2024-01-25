@@ -4,6 +4,8 @@ import {
   CLASSFILTER,
   PLATFORM,
   DELETEPLATFORMS,
+  GENRES,
+  DELETEGENRES,
 } from './types';
 import axios from 'axios';
 import store from './store';
@@ -136,6 +138,20 @@ export function platform(payload) {
 export function deletePlatform(payload) {
   return {
     type: DELETEPLATFORMS,
+    payload,
+  };
+}
+
+export function genres(payload) {
+  return {
+    type: GENRES,
+    payload,
+  };
+}
+
+export function deleteGenres(payload) {
+  return {
+    type: DELETEGENRES,
     payload,
   };
 }

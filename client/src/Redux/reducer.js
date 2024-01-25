@@ -4,6 +4,8 @@ import {
   CLASSFILTER,
   PLATFORM,
   DELETEPLATFORMS,
+  GENRES,
+  DELETEGENRES,
 } from './types';
 
 const initialState = {
@@ -11,6 +13,7 @@ const initialState = {
   pag: {},
   classGenres: {},
   platforms: [],
+  genres: [],
 };
 
 export default function reducer(state = initialState, {type, payload}) {
@@ -25,14 +28,18 @@ export default function reducer(state = initialState, {type, payload}) {
       const newPlatforms = [...state.platforms, payload];
       return {...state, platforms: newPlatforms};
     case DELETEPLATFORMS:
-      console.log('Payload:', payload);
-      console.log('State platforms:', state.platforms);
-
-      state.platforms.forEach((element) => {
-        if (element !== payload) console.log(element);
+      const newPlatforms2 = state.platforms.filter((element) => {
+        return element !== payload.trim();
       });
-
-      return {...state, platforms: []};
+      return {...state, platforms: newPlatforms2};
+    case GENRES:
+      const newGenres = [...state.genres, payload];
+      return {...state, genres: newGenres};
+    case DELETEGENRES:
+      const newGenres2 = state.genres.filter((element) => {
+        return element !== payload.trim();
+      });
+      return {...state, genres: newGenres2};
     default:
       return state;
   }

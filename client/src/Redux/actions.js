@@ -1,7 +1,12 @@
-import {ACCESS, IDRANDOM} from './types';
+import {
+  ACCESS,
+  IDRANDOM,
+  CLASSFILTER,
+  PLATFORM,
+  DELETEPLATFORMS,
+} from './types';
 import axios from 'axios';
 import store from './store';
-import {LuHourglass} from 'react-icons/lu';
 
 export function access(payload) {
   return {
@@ -57,5 +62,80 @@ export function idRandom(payload) {
       type: IDRANDOM,
       payload: memoriPag,
     });
+  };
+}
+
+export function classGenres(payload) {
+  return async (dispatch) => {
+    if (payload === 'delete') {
+      return dispatch({
+        type: CLASSFILTER,
+        payload: {},
+      });
+    }
+    if (payload === 'Top Rated' || payload === 'Lowest Rated') {
+      const {data} = await axios(
+        `http://localhost:3001/filter/?ratings=${payload}`,
+      );
+      let memori = {};
+      let min = 0;
+      let max = 10;
+      for (let i = 1; i <= 10; i++) {
+        memori[i] = data.slice(min, max);
+        min += 10;
+        max += 10;
+      }
+      return dispatch({
+        type: CLASSFILTER,
+        payload: memori,
+      });
+    }
+    if (payload === 'name' || payload === '-name') {
+      const {data} = await axios(
+        ` http://localhost:3001/filter/?name=${payload}`,
+      );
+      let memori = {};
+      let min = 0;
+      let max = 10;
+      for (let i = 1; i <= 10; i++) {
+        memori[i] = data.slice(min, max);
+        min += 10;
+        max += 10;
+      }
+      return dispatch({
+        type: CLASSFILTER,
+        payload: memori,
+      });
+    }
+    console.log(payload);
+    const {data} = await axios(
+      `http://localhost:3001/filter?genres=${payload}`,
+    );
+    let memori = {};
+    let min = 0;
+    let max = 10;
+    for (let i = 1; i <= 10; i++) {
+      memori[i] = data.slice(min, max);
+      min += 10;
+      max += 10;
+    }
+    return dispatch({
+      type: CLASSFILTER,
+      payload: memori,
+    });
+  };
+}
+
+export function platform(payload) {
+  return {
+    type: PLATFORM,
+    payload,
+  };
+}
+
+export function deletePlatform(payload) {
+  return {
+    type: DELETEPLATFORMS,
+    payload,
   };
 }

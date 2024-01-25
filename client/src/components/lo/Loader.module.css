@@ -1,0 +1,27 @@
+.container {
+  margin-top: 80px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  padding-block: 30px;
+}
+.loader {
+  width: 200px;
+  height: 200px;
+  border: 15px solid rgb(142, 141, 141);
+  border-left: 15px solid rgba(241, 9, 9, 0.806);
+  border-radius: 50%;
+  animation: girar 1.5s infinite;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -3,17 +3,42 @@ import FilterTemplate from './FilterTemplate';
 import {Genres, ImgsGenres} from '../../../assets/genres.js';
 import {LuChevronUp, LuChevronDown} from 'react-icons/lu';
 import {GrDislike, GrLike} from 'react-icons/gr';
-
 import styles from './SeccionFilters.module.css';
+import {useDispatch} from 'react-redux';
+import {Link, useNavigate} from 'react-router-dom';
+import {classGenres} from '../../../Redux/actions.js';
+import {smoothScrollToTop} from '../../../assets/scroll.js';
 
 export default function SeccionFilters() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showGenres, setShowGenres] = useState(false);
   const genres = Genres;
   const imgGenres = ImgsGenres;
 
+  const handleReload = () => {
+    navigate('/');
+    window.location.reload();
+  };
+  const handleClick = (genre) => {
+    dispatch(classGenres(genre));
+    navigate(`/filters/${genre}`);
+    smoothScrollToTop();
+  };
   return (
     <div className={styles.seccionFilters}>
-      <h1>Home</h1>
+      <Link
+        to={'/'}
+        style={{textDecoration: 'none', color: 'white'}}
+        onClick={handleReload}>
+        <h1>Home</h1>
+      </Link>
+
+      <Link
+        to={'/createVideoGame'}
+        style={{textDecoration: 'none', color: 'white'}}>
+        <h2>Create Video Game</h2>
+      </Link>
       <div className={styles.containerFilters}>
         <h2>Genres</h2>
         <ul>
@@ -67,8 +92,8 @@ export default function SeccionFilters() {
         </ul>
         <h2>By Name</h2>
         <div className={styles.byName}>
-          <span>A - Z</span>
-          <span>Z - A</span>
+          <span onClick={() => handleClick('name')}>A - Z</span>
+          <span onClick={() => handleClick('-name')}>Z - A</span>
         </div>
       </div>
     </div>

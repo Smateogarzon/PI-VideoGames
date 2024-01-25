@@ -1,26 +1,26 @@
-import { FaWindows } from "react-icons/fa";
-import { FaXbox } from "react-icons/fa";
-import { FaPlaystation } from "react-icons/fa";
-import { BsNintendoSwitch } from "react-icons/bs";
-import { FaApple } from "react-icons/fa6";
-import { IoLogoAndroid } from "react-icons/io";
-import { FaLinux } from "react-icons/fa6";
-import { SiWii } from "react-icons/si";
-import { SiAtari } from "react-icons/si";
-import { SiWebmoney } from "react-icons/si";
+import {FaWindows} from 'react-icons/fa';
+import {FaXbox} from 'react-icons/fa';
+import {FaPlaystation} from 'react-icons/fa';
+import {BsNintendoSwitch} from 'react-icons/bs';
+import {FaApple} from 'react-icons/fa6';
+import {IoLogoAndroid} from 'react-icons/io';
+import {FaLinux} from 'react-icons/fa6';
+import {SiWii} from 'react-icons/si';
+import {SiAtari} from 'react-icons/si';
+import {SiWebmoney} from 'react-icons/si';
 
-export default function Icons({ platforms, cardP }) {
+export default function Icons({platforms, cardP}) {
   const logsPlatforms = {
-    pc: { name: "pc", icon: <FaWindows /> },
-    xbox: { name: "xbox", icon: <FaXbox /> },
-    playstation: { name: "playstation", icon: <FaPlaystation /> },
-    nintendo: { name: "nintendo", icon: <BsNintendoSwitch /> },
-    mac: { name: "mac", icon: <FaApple /> },
-    android: { name: "android", icon: <IoLogoAndroid /> },
-    linux: { name: "linux", icon: <FaLinux /> },
-    wii: { name: "wii", icon: <SiWii /> },
-    atari: { name: "atari", icon: <SiAtari /> },
-    web: { name: "web", icon: <SiWebmoney /> },
+    pc: {name: 'pc', icon: <FaWindows />},
+    xbox: {name: 'xbox', icon: <FaXbox />},
+    playstation: {name: 'playstation', icon: <FaPlaystation />},
+    nintendo: {name: 'nintendo', icon: <BsNintendoSwitch />},
+    mac: {name: 'mac', icon: <FaApple />},
+    android: {name: 'android', icon: <IoLogoAndroid />},
+    linux: {name: 'linux', icon: <FaLinux />},
+    wii: {name: 'wii', icon: <SiWii />},
+    atari: {name: 'atari', icon: <SiAtari />},
+    web: {name: 'web', icon: <SiWebmoney />},
   };
 
   const renderIcon = new Set();
@@ -37,7 +37,7 @@ export default function Icons({ platforms, cardP }) {
     });
   }
   const renderIconC = new Set();
-  if (cardP) {
+  if (cardP && typeof cardP[0] === 'object') {
     cardP.forEach((platforms) => {
       for (const key in logsPlatforms) {
         if (
@@ -45,6 +45,14 @@ export default function Icons({ platforms, cardP }) {
             .toLowerCase()
             .includes(logsPlatforms[key].name)
         ) {
+          renderIconC.add(logsPlatforms[key].icon);
+        }
+      }
+    });
+  } else if (cardP) {
+    cardP.forEach((platforms) => {
+      for (const key in logsPlatforms) {
+        if (platforms.toLowerCase().includes(logsPlatforms[key].name)) {
           renderIconC.add(logsPlatforms[key].icon);
         }
       }

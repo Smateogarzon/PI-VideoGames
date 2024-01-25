@@ -1,14 +1,16 @@
-import { CgMathPlus, CgMathMinus } from "react-icons/cg";
-import { useState } from "react";
-import { SlArrowRight } from "react-icons/sl";
-import Icon from "../../SearchBar/Icons";
-import styles from "./Card.module.css";
-export default function card({ data }) {
+import {CgMathPlus, CgMathMinus} from 'react-icons/cg';
+import {useState} from 'react';
+import {SlArrowRight} from 'react-icons/sl';
+import Icon from '../../SearchBar/Icons';
+import styles from './Card.module.css';
+export default function card({data, data2}) {
   const [isFav, setIsFav] = useState(false);
-  const [nameSize, setNameSize] = useState(false);
-  const { background_image, name, platforms, released, genres, rating } =
-    data.data;
-  const newGenres = genres.map((e) => e.name);
+
+  const {background_image, name, platforms, released, genres, rating} = data
+    ? data.data
+    : data2;
+  const newGenres = data ? genres.map((e) => e.name) : data2.genres;
+
   const handleFavorite = () => {
     if (!isFav) {
       setIsFav(true);
@@ -16,32 +18,37 @@ export default function card({ data }) {
     }
     setIsFav(false);
   };
+
   return (
     <div className={styles.containerCardMini}>
-      <div className={styles.containerImg}>
-        <img src={background_image} alt={`${name}`} />
-      </div>
-      <div className={styles.detail}>
-        <div className={styles.coninerIcon}>
-          <Icon cardP={platforms} />
+      <div className={styles.top}>
+        <div className={styles.containerImg}>
+          <img src={background_image} alt={`${name}`} />
         </div>
-        <div className={styles.coninerName}>
-          <samp>{name}</samp>
+
+        <div className={styles.detail}>
+          <div className={styles.coninerIcon}>
+            <Icon cardP={platforms} />
+          </div>
+          <div className={styles.coninerName}>
+            <h2>{name}</h2>
+          </div>
+          <div className={styles.containerBtn}>
+            {!isFav && (
+              <button className={styles.btnFav} onClick={handleFavorite}>
+                <CgMathPlus />
+                <span className={styles.btnFavText}>Add Library</span>
+              </button>
+            )}
+            {isFav && (
+              <button className={styles.btnFav} onClick={handleFavorite}>
+                <CgMathMinus />
+                <span className={styles.btnFavText}>Delete Library</span>
+              </button>
+            )}
+          </div>
         </div>
-        <div className={styles.containerBtn}>
-          {!isFav && (
-            <button className={styles.btnFav} onClick={handleFavorite}>
-              <CgMathPlus />
-              <span className={styles.btnFavText}>Add Library</span>
-            </button>
-          )}
-          {isFav && (
-            <button className={styles.btnFav} onClick={handleFavorite}>
-              <CgMathMinus />
-              <span className={styles.btnFavText}>Delete Library</span>
-            </button>
-          )}
-        </div>
+
         <article className={styles.containerDetail}>
           <ul>
             <li>
@@ -51,7 +58,7 @@ export default function card({ data }) {
             <li>
               <p>Genres:</p>
               <span>
-                {newGenres.length > 0 ? newGenres.join(" ,") : "undefined"}
+                {newGenres.length > 0 ? newGenres.join(' ,') : 'undefined'}
               </span>
             </li>
             <li>

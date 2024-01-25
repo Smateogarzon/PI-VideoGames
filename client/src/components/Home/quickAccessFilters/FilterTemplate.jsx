@@ -1,6 +1,24 @@
+import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {classGenres} from '../../../Redux/actions';
+import {smoothScrollToTop} from '../../../assets/scroll';
+
 export default function FilterTemplate({genre, imgGenre, text}) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    if (text !== 'Top Rated' && text !== 'Lowest Rated') {
+      dispatch(classGenres(genre));
+      navigate(`/filters/${genre}`);
+      smoothScrollToTop();
+    } else {
+      dispatch(classGenres(text));
+      navigate(`/filters/${text}`);
+      smoothScrollToTop();
+    }
+  };
   return (
-    <li>
+    <li onClick={handleClick}>
       {' '}
       <div>
         {imgGenre && (

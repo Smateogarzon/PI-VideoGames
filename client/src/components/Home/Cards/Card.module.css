@@ -1,61 +1,56 @@
+/* --------------------------------- General ------------------------------- */
+
 .containerCardMini {
   border-radius: 15px;
   background-color: rgb(20, 20, 20);
   overflow: hidden;
   position: relative;
 }
-.containerCardMini:hover {
-  width: 32%;
-  position: absolute;
-  z-index: 2;
-}
 
-.containerImg {
+/* --------------------------------- Top ------------------------------- */
+
+.top .containerImg {
   width: 100%;
   height: 210px;
 }
-.containerImg img {
+.top .containerImg img {
   border-radius: 15px 15px 0 0;
   width: 100%;
   height: 210px;
   object-fit: cover;
 }
 
-.detail {
+.top .detail {
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 
-.coninerIcon {
+.top .detail .coninerIcon {
   display: flex;
   width: 100%;
-  margin-top: 4px;
-  margin-left: 10px;
   gap: 8px;
-  font-size: 20px;
+  font-size: 15px;
 }
 
-.coninerName {
+.top .detail .coninerName {
   display: flex;
   width: 100%;
-  margin-top: 4px;
-  margin-left: 10px;
+
   white-space: pre-wrap;
-  font-size: 25px;
 }
 
-.containerBtn {
+.top .detail .coninerName h2 {
+  font-size: 1.5rem;
+  line-height: 28px;
+}
+
+.top .detail .containerBtn {
   display: flex;
   justify-content: start;
-  margin-right: 10px;
-  margin-bottom: 5px;
-}
-.containerBtn button {
-  margin-top: 10px;
-  margin-left: 10%;
 }
 
-.btnFav {
+.top .detail .containerBtn .btnFav {
   border: none;
   border-radius: 10px;
   font-weight: 700;
@@ -69,7 +64,7 @@
   flex-direction: column;
   transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.btnFavText {
+.top .detail .containerBtn .btnFavText {
   position: absolute;
   opacity: 0;
   border-radius: 10px;
@@ -80,36 +75,40 @@
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.btnFav::before {
+.top .detail .containerBtn .btnFav::before {
   position: absolute;
-  content: "";
+  content: '';
   height: 8px;
   width: 8px;
-
   background-color: blue;
   left: 100%;
   opacity: 0;
   transform: translate(-50%) rotate(45deg);
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.btnFav:hover::before {
+.top .detail .containerBtn .btnFav:hover::before {
   opacity: 1;
 }
-.btnFav:hover .btnFavText {
+.top .detail .containerBtn .btnFav:hover .btnFavText {
   left: 100%;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
+
+/* --------------------------------- Bottom ------------------------------- */
+
+.top:hover .containerDetail {
+  opacity: 1;
+  height: auto;
+}
+
+/* ------ detail -------- */
+
 .containerDetail {
   opacity: 0;
   height: 0;
   transition: opacity 0.3s ease, height 0.3s ease;
-}
-
-.containerCardMini:hover .containerDetail {
-  opacity: 1;
-  height: auto;
 }
 
 .containerDetail > ul {
@@ -125,12 +124,14 @@
   list-style: none;
   border-bottom: 1px solid rgba(214, 214, 214, 0.699);
 }
+
 .containerDetail > ul > li > p {
   opacity: 0.5;
   margin: 0;
   padding-block: 10px;
   margin-right: 15px;
 }
+
 .containerDetail > ul > li > span {
   display: flex;
   padding-block: 5px;
@@ -138,12 +139,13 @@
   padding-right: 15px;
   text-align: right;
 }
-.containerBtnShow {
+
+.containerDetail .containerBtnShow {
   display: flex;
   justify-content: center;
 }
 
-.btmSow {
+.containerDetail .containerBtnShow .btmSow {
   background-color: rgb(49, 49, 49);
   border-radius: 5px;
   margin-block: 15px;
@@ -153,17 +155,20 @@
   width: 70%;
   padding-inline: 5px;
 }
-.btmSow > button {
+
+.containerDetail .containerBtnShow .btmSow > button {
   white-space: nowrap;
   font-size: 25px;
   color: white;
   border: none;
   background-color: transparent;
 }
-.btmSow > button:hover {
+
+.containerDetail .containerBtnShow .btmSow > button:hover {
   color: rgb(155, 134, 19);
 }
-.btmSow > span {
+
+.containerDetail .containerBtnShow .btmSow > span {
   display: flex;
   align-items: center;
   color: white;

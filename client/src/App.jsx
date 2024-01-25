@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {idRandom} from './Redux/actions';
 import SearchBar from './components/SearchBar/SearchBar';
 import SingUp from './components/Sin_Up/Sign_Up';
@@ -13,9 +13,6 @@ function App() {
   const onSearch = (numPag) => {
     dispatch(idRandom(numPag));
   };
-  useEffect(() => {
-    onSearch(1);
-  }, []);
 
   return (
     <div className={styles.containerApp}>
@@ -30,6 +27,11 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home onSearch={onSearch} />} />
+          <Route
+            path="/filters/:genre"
+            element={<Home onSearch={onSearch} />}
+          />
+          <Route path="/createVideoGame" element={<Home />} />
           <Route path="/sing_up" element={<SingUp />} />
           <Route path="/login" element={<Login />} />
         </Routes>

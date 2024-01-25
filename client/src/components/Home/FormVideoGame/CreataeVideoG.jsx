@@ -1,91 +1,121 @@
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import styles from "./CreateVideoGame.module.css";
 import {
   platform,
   deletePlatform,
   genres,
   deleteGenres,
-} from '../../../Redux/actions';
-import {Genres} from '../../../assets/genres';
+} from "../../../Redux/actions";
+import { Genres } from "../../../assets/genres";
 
 export default function CreataeVideoG() {
   const dispatch = useDispatch();
   const createPlatform = useSelector((state) => state.platforms);
   const createGenres = useSelector((state) => state.genres);
+  const [valForm, setValForm] = useState({
+    name: "",
+    description: "",
+    background_image: "",
+    background_image_additional: "",
+    released: "",
+    rating: "",
+  });
 
   const handlePlatforms = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     dispatch(platform(value));
   };
   const deletePlatforms = (event) => {
-    const {textContent} = event.target;
+    const { textContent } = event.target;
     dispatch(deletePlatform(textContent));
   };
   const handleGenres = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     dispatch(genres(value));
   };
   const deleteGenre = (event) => {
     dispatch(deleteGenres(event.target.textContent));
   };
+  const handleOnchange = (event) => {
+    const { name, value } = event.target;
+    setValForm((preVal) => ({
+      ...preVal,
+      [name]: value,
+    }));
+  };
+
   return (
-    <div>
-      <form>
-        <label htmlFor="name">name</label>
-        <input type="text" id="name" name="name" />
-        <label htmlFor="description">description</label>
+    <div className={styles.contain}>
+      <form className={styles.containForm}>
+        <label htmlFor="name">name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={valForm.name}
+          onChange={handleOnchange}
+        />
+        <label htmlFor="description">description:</label>
         <textarea
           name="description"
           id="description"
           cols="30"
-          rows="10"></textarea>
+          rows="10"
+          value={valForm.description}
+          onChange={handleOnchange}
+        ></textarea>
         <label htmlFor="platforms">add Platforms:</label>
         <select
           name="platforms"
           id="platforms"
           onChange={handlePlatforms}
-          defaultValue="add">
-          <option value={'add'} disabled={true}>
+          defaultValue="add"
+        >
+          <option value={"add"} disabled={true}>
             Select platforms
           </option>
-          <option value="pc" disabled={createPlatform.includes('pc')}>
+          <option value="pc" disabled={createPlatform.includes("pc")}>
             pc
           </option>
-          <option value="xbox" disabled={createPlatform.includes('xbox')}>
+          <option value="xbox" disabled={createPlatform.includes("xbox")}>
             xbox
           </option>
           <option
             value="playstation"
-            disabled={createPlatform.includes('playstation')}>
+            disabled={createPlatform.includes("playstation")}
+          >
             playstation
           </option>
           <option
             value="nintendo"
-            disabled={createPlatform.includes('nintendo')}>
+            disabled={createPlatform.includes("nintendo")}
+          >
             nintendo
           </option>
-          <option value="mac" disabled={createPlatform.includes('mac')}>
+          <option value="mac" disabled={createPlatform.includes("mac")}>
             mac
           </option>
-          <option value="android" disabled={createPlatform.includes('android')}>
+          <option value="android" disabled={createPlatform.includes("android")}>
             android
           </option>
-          <option value="linux" disabled={createPlatform.includes('linux')}>
+          <option value="linux" disabled={createPlatform.includes("linux")}>
             linux
           </option>
-          <option value="wii" disabled={createPlatform.includes('wii')}>
+          <option value="wii" disabled={createPlatform.includes("wii")}>
             wii
           </option>
-          <option value="atari" disabled={createPlatform.includes('atari')}>
+          <option value="atari" disabled={createPlatform.includes("atari")}>
             atari
           </option>
-          <option value="web" disabled={createPlatform.includes('web')}>
+          <option value="web" disabled={createPlatform.includes("web")}>
             web
           </option>
         </select>
         <div>
           {createPlatform.map((platform, index) => (
             <span key={index} onClick={deletePlatforms}>
-              {platform}{' '}
+              {platform}{" "}
             </span>
           ))}
         </div>
@@ -94,7 +124,8 @@ export default function CreataeVideoG() {
           name="genres"
           id="genres"
           onChange={handleGenres}
-          defaultValue="add">
+          defaultValue="add"
+        >
           <option value="add" disabled={true}>
             Select Genres
           </option>
@@ -102,7 +133,8 @@ export default function CreataeVideoG() {
             <option
               key={index}
               value={genre}
-              disabled={createGenres.includes(genre)}>
+              disabled={createGenres.includes(genre)}
+            >
               {genre}
             </option>
           ))}
@@ -110,10 +142,50 @@ export default function CreataeVideoG() {
         <div>
           {createGenres.map((genre, index) => (
             <span key={index} onClick={deleteGenre}>
-              {genre}{' '}
+              {genre}{" "}
             </span>
           ))}
         </div>
+        <label htmlFor="imgP">main image:</label>
+        <input
+          type="url"
+          id="imgP"
+          name="background_image"
+          value={valForm.background_image}
+          onChange={handleOnchange}
+        />
+        <label htmlFor="imgPe">additional images:</label>
+
+        <input
+          type="url"
+          id="imgPe"
+          onChange={handleOnchange}
+          value={valForm.background_image_additional}
+          name="background_image_additional"
+        />
+        <label htmlFor="released">Released:</label>
+        <input
+          type="date"
+          id="released"
+          name="released"
+          value={valForm.released}
+          onChange={handleOnchange}
+        />
+        <label htmlFor="rating">ratign:</label>
+        <input
+          id="rating"
+          type="number"
+          name="rating"
+          value={valForm.rating}
+          onChange={handleOnchange}
+        />
+        <button>
+          <span> </span>
+          <span> </span>
+          <span> </span>
+          <span> </span>
+          Create Video Game
+        </button>
       </form>
     </div>
   );

@@ -1,8 +1,8 @@
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   const videogame = sequelize.define(
-    'videogame',
+    "videogame",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -89,7 +89,7 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false,
-    },
+    }
   );
   return videogame;
 };

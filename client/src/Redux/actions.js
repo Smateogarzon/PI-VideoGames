@@ -6,9 +6,9 @@ import {
   DELETEPLATFORMS,
   GENRES,
   DELETEGENRES,
-} from './types';
-import axios from 'axios';
-import store from './store';
+} from "./types";
+import axios from "axios";
+import store from "./store";
 
 export function access(payload) {
   return {
@@ -27,10 +27,10 @@ async function dataCard(memoriPag, payload) {
 
   while (retries > 0 && arrayPag.length !== 3) {
     try {
-      const {data} = await axios(
-        `http://localhost:3001/videogames/${numRandom()}`,
+      const { data } = await axios(
+        `http://localhost:3001/videogames/${numRandom()}`
       );
-      arrayPag.push({data});
+      arrayPag.push({ data });
       memoriPag[payload] = arrayPag;
       retries = 3;
     } catch (error) {
@@ -69,32 +69,34 @@ export function idRandom(payload) {
 
 export function classGenres(payload) {
   return async (dispatch) => {
-    if (payload === 'delete') {
+    if (payload === "delete") {
       return dispatch({
         type: CLASSFILTER,
         payload: {},
       });
     }
-    if (payload === 'Top Rated' || payload === 'Lowest Rated') {
-      const {data} = await axios(
-        `http://localhost:3001/filter/?ratings=${payload}`,
+    if (payload === "Top Rated" || payload === "Lowest Rated") {
+      const { data } = await axios(
+        `http://localhost:3001/filter/?ratings=${payload}`
       );
-      let memori = {};
-      let min = 0;
-      let max = 10;
-      for (let i = 1; i <= 10; i++) {
-        memori[i] = data.slice(min, max);
-        min += 10;
-        max += 10;
+      if (data) {
+        let memori = {};
+        let min = 0;
+        let max = 10;
+        for (let i = 1; i <= 10; i++) {
+          memori[i] = data.slice(min, max);
+          min += 10;
+          max += 10;
+        }
+        return dispatch({
+          type: CLASSFILTER,
+          payload: memori,
+        });
       }
-      return dispatch({
-        type: CLASSFILTER,
-        payload: memori,
-      });
     }
-    if (payload === 'name' || payload === '-name') {
-      const {data} = await axios(
-        ` http://localhost:3001/filter/?name=${payload}`,
+    if (payload === "name" || payload === "-name") {
+      const { data } = await axios(
+        ` http://localhost:3001/filter/?name=${payload}`
       );
       let memori = {};
       let min = 0;
@@ -110,8 +112,8 @@ export function classGenres(payload) {
       });
     }
     console.log(payload);
-    const {data} = await axios(
-      `http://localhost:3001/filter?genres=${payload}`,
+    const { data } = await axios(
+      `http://localhost:3001/filter?genres=${payload}`
     );
     let memori = {};
     let min = 0;

@@ -3,10 +3,13 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {access} from '../../Redux/actions';
+import styles from './Login.module.css';
 
 export default function login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const [tipeError, setTipeError] = useState('');
   const [log, setLog] = useState({
     email: '',
     password: '',
@@ -30,13 +33,17 @@ export default function login() {
           password: '',
         });
         dispatch(access(true));
+        setError(false);
+        navigate('/');
       }
     } catch (error) {
-      console.error(error);
+      const values = Object.values(error.response.data);
+      setTipeError(values.join(' , '));
+      setError(true);
     }
   };
   return (
-    <div>
+    <div className={styles.container}>
       <form>
         <h2>Log in</h2>
         <div>
@@ -61,7 +68,13 @@ export default function login() {
             onChange={handleChange}
           />
         </div>
-        <button onClick={submmit}>Log in</button>
+        <button onClick={submmit}>
+          <span> </span>
+          <span> </span>
+          <span> </span>
+          <span> </span>Log in
+        </button>
+        {error && <p>{tipeError}</p>}
         <a href="/sing_up">Don't have an account? Sign up.</a>
       </form>
     </div>

@@ -10,10 +10,8 @@ async function postVideoGame(req, res) {
     }
 
     // Mapea las plataformas y géneros del cuerpo de la solicitud
-    const platformsArray = req.body.platforms.map(
-      (platform) => platform.platform['name'],
-    );
-    const generesArray = req.body.genres.map((genre) => genre.name);
+    const platformsArray = req.body.platforms.map((platform) => platform);
+    const generesArray = req.body.genres.map((genre) => genre);
 
     // Campos requeridos para la creación del videojuego
     const requiredFields = [
@@ -28,6 +26,7 @@ async function postVideoGame(req, res) {
     if (
       missingFields.length > 0 ||
       platformsArray.length === 0 ||
+      generesArray.length === 0 ||
       req.body.rating < 0
     ) {
       return res

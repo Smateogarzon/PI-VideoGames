@@ -5,12 +5,60 @@ body {
   background-color: #232222;
   font-family: system-ui, sans-serif;
 }
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.244) 0%,
+    rgba(0, 0, 0, 0.698) 100%
+  );
+}
+.containerAppSing {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-image: url('https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/213kUPI2AM55bABQw0jPcm/1ebc9d6d84a2208b0f2bd8971f2fd00a/feature1_960x540.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.containerAppLogin {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-image: url('https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/ss_bac60bacbf5da8945103648c08d27d5e202444ca.1920x1080.jpg?t=1695140956');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
 .containerApp {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+.containerAppCreate {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  background-image: url('https://cdn.vox-cdn.com/thumbor/ayYQG0S5s9zq9CTBdDyNNhYvDcc=/0x0:3840x2160/1200x675/filters:focal(1613x773:2227x1387)/cdn.vox-cdn.com/uploads/chorus_image/image/70506194/Horizon_Forbidden_West_20220211184602.0.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 .header {
   width: 100%;

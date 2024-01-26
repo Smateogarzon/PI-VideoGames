@@ -1,69 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
-
-.contain {
-  width: 100%;
+.container {
   display: flex;
+  width: 100%;
   justify-content: center;
-  align-items: center;
-  padding-top: 45px;
+  padding-top: 50px;
 }
-.containForm {
-  width: 50%;
+.container form {
+  width: 25%;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: rgba(5, 5, 5, 0.644);
-  gap: 10px;
+  background-color: rgba(3, 3, 3, 0.644);
+  gap: 20px;
   border-radius: 15px;
   box-shadow: 0px 0px 10px 0px red;
-}
-.containForm label {
-  font-size: 20px;
-  padding-left: 10px;
+  text-align: center;
 }
 
-.containForm textarea {
-  background-color: rgba(56, 56, 56, 0.849);
-  border-radius: 5px;
-  color: white;
-  font-size: 15px;
+.container form h2 {
+  font-size: 30px;
+  text-align: start;
+  padding-left: 20px;
 }
 
-.containForm input {
+.container form input {
+  width: 100%;
   font-weight: 800;
   background-color: rgba(56, 56, 56, 0.849);
   border-radius: 5px;
-  height: 1.5rem;
+  height: 3rem;
   color: white;
   font-size: 15px;
   font-family: 'Cabin', sans-serif;
   letter-spacing: 2px;
+  border: none;
+  margin-block: 10px;
 }
-.containForm input:focus {
+
+.container input:focus {
   background-color: rgba(233, 13, 13, 0.253);
 }
-.containForm select {
-  background-color: rgba(56, 56, 56, 0.849);
-  border-radius: 5px;
-  height: 1.5rem;
+.container p {
   color: white;
-  font-family: 'Cabin', sans-serif;
-  letter-spacing: 2px;
-  font-weight: 800;
+  margin-top: 1rem;
 }
-
-.containForm select option {
-  font-size: 15px;
+.container .error {
+  color: red;
+  letter-spacing: 4px;
 }
-
-.containForm select:focus option {
-  background-color: rgba(56, 56, 56, 0.849);
-}
-.containForm select:focus {
-  background-color: rgba(255, 0, 0, 0.329);
-}
-
-.containForm button {
+.container button {
   background-color: black;
   color: white;
   font-size: 24px;
@@ -76,26 +60,26 @@
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
 }
 
-.containForm button:nth-child(1) {
+.container button:nth-child(1) {
   filter: hue-rotate(290deg);
 }
-.containForm button:nth-child(3) {
+.container button:nth-child(3) {
   filter: hue-rotate(290deg);
 }
-.containForm button:hover {
+.container button:hover {
   background: #ac121244;
   box-shadow: 0 0 5px #f4030365, 0 0 25px #c51313, 0 0 50px #a80909,
     0 0 200px #d126199c;
   color: black;
 }
-.containForm button span {
+.container button span {
   display: block;
   position: absolute;
 }
 
-.containForm button span:nth-child(1) {
+.container button span:nth-child(1) {
   animation: animate1 2s linear infinite;
-  background: linear-gradient(90deg, transparent, #03e9f4);
+  background: linear-gradient(90deg, transparent, #f40303);
   height: 2px;
   left: -100px;
   top: 0px;
@@ -112,10 +96,10 @@
   }
 }
 
-.containForm button span:nth-child(2) {
+.container button span:nth-child(2) {
   animation: animate2 2s linear infinite;
   animation-delay: 0.5s;
-  background: linear-gradient(180deg, transparent, #03e9f4);
+  background: linear-gradient(180deg, transparent, #90f403);
   height: 100%;
   top: -100%;
   width: 2px;
@@ -132,10 +116,10 @@
   }
 }
 
-.containForm button span:nth-child(3) {
+.container button span:nth-child(3) {
   animation: animate3 2s linear infinite;
   animation-delay: 1s;
-  background: linear-gradient(180deg, transparent, #03e9f4);
+  background: linear-gradient(180deg, transparent, #03f4e0);
   height: 2px;
   right: -100%;
   width: 100%;
@@ -152,10 +136,10 @@
   }
 }
 
-.containForm button span:nth-child(4) {
+.container button span:nth-child(4) {
   animation: animate4 2s linear infinite;
   animation-delay: 1.5s;
-  background: linear-gradient(270deg, transparent, #03e9f4);
+  background: linear-gradient(270deg, transparent, #7b03f4);
   height: 100%;
   left: 0;
   width: 2px;

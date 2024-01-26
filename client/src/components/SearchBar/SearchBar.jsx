@@ -60,7 +60,7 @@ export default function searchBar() {
 
   const logout = async () => {
     try {
-      const {data} = await axios.post('http://localhost:3001/logout');
+      await axios.post('http://localhost:3001/logout');
       dispatch(access(false));
     } catch (error) {
       console.error(error);
@@ -108,8 +108,10 @@ export default function searchBar() {
         </div>
       )}
       {admision && (
-        <div>
-          <button onClick={logout}>Log Out</button>
+        <div className={styles.containerSession}>
+          <span onClick={logout} style={{cursor: 'pointer'}}>
+            Log Out
+          </span>
         </div>
       )}
     </div>

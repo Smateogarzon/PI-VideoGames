@@ -4,17 +4,32 @@ import {Genres, ImgsGenres} from '../../../assets/genres.js';
 import {LuChevronUp, LuChevronDown} from 'react-icons/lu';
 import {GrDislike, GrLike} from 'react-icons/gr';
 import styles from './SeccionFilters.module.css';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import {classGenres} from '../../../Redux/actions.js';
 import {smoothScrollToTop} from '../../../assets/scroll.js';
+import {ToastContainer, toast, Bounce} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SeccionFilters() {
+  const access = useSelector((state) => state.access);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showGenres, setShowGenres] = useState(false);
   const genres = Genres;
   const imgGenres = ImgsGenres;
+  const notify = () =>
+    toast.warn('💣💥Login to create a video game💣💥', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+      transition: Bounce,
+    });
 
   const handleReload = () => {
     navigate('/');
@@ -35,9 +50,23 @@ export default function SeccionFilters() {
       </Link>
 
       <Link
-        to={'/createVideoGame'}
-        style={{textDecoration: 'none', color: 'white'}}>
-        <h2>Create Video Game</h2>
+        to={access ? '/createVideoGame' : '/'}
+        style={{textDecoration: 'none', color: 'white'}}
+        onClick={access ? null : notify}>
+        <h2>Create Video Game</h2>{' '}
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+        />
       </Link>
       <div className={styles.containerFilters}>
         <h2>Genres</h2>

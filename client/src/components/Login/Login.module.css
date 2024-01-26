@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  padding-top: 70px;
+  padding-top: 30px;
 }
 .container form {
   width: 25%;
@@ -30,7 +30,7 @@
   height: 3rem;
   color: white;
   font-size: 15px;
-  font-family: 'Cabin', sans-serif;
+  font-family: "Cabin", sans-serif;
   letter-spacing: 2px;
   border: none;
   margin-block: 10px;

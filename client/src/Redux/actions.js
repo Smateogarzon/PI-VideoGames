@@ -6,10 +6,9 @@ import {
   DELETEPLATFORMS,
   GENRES,
   DELETEGENRES,
-  POSTVIDEOGAME,
-} from './types';
-import axios from 'axios';
-import store from './store';
+} from "./types";
+import axios from "axios";
+import store from "./store";
 
 export function access(payload) {
   return {
@@ -28,10 +27,10 @@ async function dataCard(memoriPag, payload) {
 
   while (retries > 0 && arrayPag.length !== 3) {
     try {
-      const {data} = await axios(
-        `http://localhost:3001/videogames/${numRandom()}`,
+      const { data } = await axios(
+        `http://localhost:3001/videogames/${numRandom()}`
       );
-      arrayPag.push({data});
+      arrayPag.push({ data });
       memoriPag[payload] = arrayPag;
       retries = 3;
     } catch (error) {
@@ -70,15 +69,15 @@ export function idRandom(payload) {
 
 export function classGenres(payload) {
   return async (dispatch) => {
-    if (payload === 'delete') {
+    if (payload === "delete") {
       return dispatch({
         type: CLASSFILTER,
         payload: {},
       });
     }
-    if (payload === 'Top Rated' || payload === 'Lowest Rated') {
-      const {data} = await axios(
-        `http://localhost:3001/filter/?ratings=${payload}`,
+    if (payload === "Top Rated" || payload === "Lowest Rated") {
+      const { data } = await axios(
+        `http://localhost:3001/filter/?ratings=${payload}`
       );
       if (data) {
         let memori = {};
@@ -95,9 +94,9 @@ export function classGenres(payload) {
         });
       }
     }
-    if (payload === 'name' || payload === '-name') {
-      const {data} = await axios(
-        ` http://localhost:3001/filter/?name=${payload}`,
+    if (payload === "name" || payload === "-name") {
+      const { data } = await axios(
+        ` http://localhost:3001/filter/?name=${payload}`
       );
       let memori = {};
       let min = 0;
@@ -112,9 +111,9 @@ export function classGenres(payload) {
         payload: memori,
       });
     }
-    console.log(payload);
-    const {data} = await axios(
-      `http://localhost:3001/filter?genres=${payload}`,
+
+    const { data } = await axios(
+      `http://localhost:3001/filter?genres=${payload}`
     );
     let memori = {};
     let min = 0;
@@ -155,13 +154,6 @@ export function genres(payload) {
 export function deleteGenres(payload) {
   return {
     type: DELETEGENRES,
-    payload,
-  };
-}
-
-export function postVideoGame(payload) {
-  return {
-    type: POSTVIDEOGAME,
     payload,
   };
 }

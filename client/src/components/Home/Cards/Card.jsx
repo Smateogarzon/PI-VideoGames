@@ -1,14 +1,14 @@
-import {CgMathPlus, CgMathMinus} from 'react-icons/cg';
-import {useState} from 'react';
-import {SlArrowRight} from 'react-icons/sl';
-import Icon from '../../SearchBar/Icons';
-import styles from './Card.module.css';
-export default function card({data, data2}) {
+import { CgMathPlus, CgMathMinus } from "react-icons/cg";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { SlArrowRight } from "react-icons/sl";
+import Icon from "../../SearchBar/Icons";
+import styles from "./Card.module.css";
+export default function card({ data, data2 }) {
   const [isFav, setIsFav] = useState(false);
 
-  const {background_image, name, platforms, released, genres, rating} = data
-    ? data.data
-    : data2;
+  const { id, background_image, name, platforms, released, genres, rating } =
+    data ? data.data : data2;
   const newGenres = data ? genres.map((e) => e.name) : data2.genres;
 
   const handleFavorite = () => {
@@ -31,7 +31,12 @@ export default function card({data, data2}) {
             <Icon cardP={platforms} />
           </div>
           <div className={styles.coninerName}>
-            <h2>{name}</h2>
+            <Link
+              to={`/detail/${id}`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <h2 onClick={console.log(id)}>{name}</h2>
+            </Link>
           </div>
           <div className={styles.containerBtn}>
             {!isFav && (
@@ -58,7 +63,7 @@ export default function card({data, data2}) {
             <li>
               <p>Genres:</p>
               <span>
-                {newGenres.length > 0 ? newGenres.join(' ,') : 'undefined'}
+                {newGenres.length > 0 ? newGenres.join(" ,") : "undefined"}
               </span>
             </li>
             <li>

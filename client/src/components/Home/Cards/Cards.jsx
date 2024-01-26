@@ -35,6 +35,7 @@ export default function cards({ onSearch }) {
       }
       setTimeout(() => {
         setNumPag(1);
+
         setLoader(false);
         setRenderPag2(memoriFilters[numPag]);
       }, 15000);
@@ -44,6 +45,7 @@ export default function cards({ onSearch }) {
       }
       setTimeout(() => {
         setNumPag(1);
+
         setLoader(false);
         setRenderPag2(memoriFilters[numPag]);
       }, 6000);
@@ -75,6 +77,7 @@ export default function cards({ onSearch }) {
       setRenderPag2(memoriFilters[numPag]);
     }
   }, [numPag]);
+
   return (
     <article className={styles.container}>
       {loader ? (
@@ -116,6 +119,7 @@ export default function cards({ onSearch }) {
           disabled={numPag === 1}
           onClick={() => {
             setNumPag(numPag - 1);
+
             location.pathname === "/" && onSearch(numPag - 1);
             smoothScrollToTop();
           }}
@@ -131,6 +135,7 @@ export default function cards({ onSearch }) {
                 onClick={() => {
                   location.pathname === "/" && onSearch(e + 1);
                   setNumPag(e + 1);
+
                   smoothScrollToTop();
                 }}
               >
@@ -144,6 +149,7 @@ export default function cards({ onSearch }) {
           disabled={numPag === 10}
           onClick={() => {
             setNumPag(numPag + 1);
+
             location.pathname === "/" && onSearch(numPag + 1);
             smoothScrollToTop();
           }}

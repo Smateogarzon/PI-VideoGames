@@ -109,6 +109,11 @@ export default function searchBar() {
       )}
       {admision && (
         <div className={styles.containerSession}>
+          <Link
+            to={'/profile'}
+            style={{textDecoration: 'none', color: 'white'}}>
+            <span style={{cursor: 'pointer'}}>Your Profile</span>
+          </Link>
           <span onClick={logout} style={{cursor: 'pointer'}}>
             Log Out
           </span>

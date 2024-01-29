@@ -29,7 +29,21 @@ async function getVideogame(req, res) {
       released,
       rating,
       genres,
+      metacritic,
+      updated,
+      screenshots_count,
+      publishers,
+      developers,
+      tags,
+      ratings,
     } = data;
+
+    if (screenshots_count > 0) {
+      const {data} = await axios(`${URL_GET}/${id}/screenshots?key=${API_KEY}`);
+      this.screenshots_countArray = data.results.map((screenshot) => {
+        return screenshot.image;
+      });
+    }
 
     // Crear un objeto con la información del videojuego
     const videoGame = {
@@ -42,6 +56,13 @@ async function getVideogame(req, res) {
       released,
       rating,
       genres,
+      metacritic,
+      updated,
+      screenshots_count: this.screenshots_countArray,
+      publishers,
+      developers,
+      tags,
+      ratings,
     };
 
     res.status(200).json(videoGame);

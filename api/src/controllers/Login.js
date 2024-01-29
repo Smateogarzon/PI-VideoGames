@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 async function login(req, res) {
   try {
     const {email, password} = req.body;
-    console.log(email, password);
+
     // Buscar al usuario en la base de datos
     const existUser = await users.findOne({where: {email: email}});
 
@@ -23,6 +23,7 @@ async function login(req, res) {
       }
       if (result) {
         req.session.user = existUser.username;
+        console.log(req.session.user);
         return res.status(200).send({access: true});
       } else {
         return res.status(409).json({Error: 'Usuario o contraseña incorrecta'});

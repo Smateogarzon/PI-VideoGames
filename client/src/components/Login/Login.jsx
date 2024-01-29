@@ -26,7 +26,9 @@ export default function login() {
   const submmit = async (e) => {
     e.preventDefault();
     try {
-      const {data} = await axios.post('http://localhost:3001/login', log);
+      const {data} = await axios.post('http://localhost:3001/login', log, {
+        withCredentials: true,
+      });
       if (data.access === true) {
         setLog({
           email: '',

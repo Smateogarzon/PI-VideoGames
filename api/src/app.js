@@ -12,22 +12,32 @@ require('./db.js');
 const server = express();
 
 server.name = 'API';
+server.use(
+  cors({
+    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    credentials: true,
+  }),
+);
 
 server.use(
   session({
     secret: SECRET,
     resave: true,
     saveUninitialized: true,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000,
+      secure: false,
+      httpOnly: true,
+    },
   }),
 );
 server.use(express.json());
 server.use(cookieParser());
 server.use(morgan('dev'));
+
 server.use((req, res, next) => {
-  const allowedOrigins = [
-    'http://localhost:5173',
-    'http://localhost:3000' /* Agrega más orígenes según tus necesidades */,
-  ];
+  const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000'];
+
   const origin = req.headers.origin;
 
   if (allowedOrigins.includes(origin)) {

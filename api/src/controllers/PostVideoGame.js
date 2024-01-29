@@ -1,5 +1,5 @@
 const {videogame, plataforms, generes, users} = require('../db');
-
+const validationForm = require('../utils/validationsForm');
 // Maneja la creación de un nuevo videojuego
 async function postVideoGame(req, res) {
   try {
@@ -8,7 +8,11 @@ async function postVideoGame(req, res) {
     if (equal) {
       throw new Error('Ya existe el videojuego');
     }
-
+    const validationFormError = validationForm(req.body);
+    // Verifica si hay campos obligatorios faltantes
+    if (Object.keys(validationFormError).length > 0) {
+      return res.status(400).json(validationFormError);
+    }
     // Mapea las plataformas y géneros del cuerpo de la solicitud
     const platformsArray = req.body.platforms.map((platform) => platform);
     const generesArray = req.body.genres.map((genre) => genre);
@@ -73,6 +77,7 @@ async function postVideoGame(req, res) {
 
     // Asocia el videojuego al usuario actual
     const session = req.session.user;
+    console.log(session);
     const user = await users.findOne({where: {username: session}});
     if (user) {
       await user.addVideogame(createVideogame);

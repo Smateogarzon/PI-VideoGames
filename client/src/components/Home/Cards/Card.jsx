@@ -1,15 +1,14 @@
-import {CgMathPlus, CgMathMinus} from 'react-icons/cg';
-import {Link} from 'react-router-dom';
-import {useState} from 'react';
-import {SlArrowRight} from 'react-icons/sl';
-import Icon from '../../SearchBar/Icons';
-import styles from './Card.module.css';
-export default function card({data, data2}) {
+import { CgMathPlus, CgMathMinus } from "react-icons/cg";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { SlArrowRight } from "react-icons/sl";
+import Icon from "../../SearchBar/Icons";
+import styles from "./Card.module.css";
+export default function card({ data, data2 }) {
   const [isFav, setIsFav] = useState(false);
 
-  const {id, background_image, name, platforms, released, genres, rating} = data
-    ? data.data
-    : data2;
+  const { id, background_image, name, platforms, released, genres, rating } =
+    data ? data.data : data2;
   const newGenres = data ? genres.map((e) => e.name) : data2.genres;
 
   const handleFavorite = () => {
@@ -34,7 +33,8 @@ export default function card({data, data2}) {
           <div className={styles.coninerName}>
             <Link
               to={`/detail/${id}`}
-              style={{textDecoration: 'none', color: 'white'}}>
+              style={{ textDecoration: "none", color: "white" }}
+            >
               <h2>{name}</h2>
             </Link>
           </div>
@@ -63,7 +63,7 @@ export default function card({data, data2}) {
             <li>
               <p>Genres:</p>
               <span>
-                {newGenres.length > 0 ? newGenres.join(' ,') : 'undefined'}
+                {newGenres.length > 0 ? newGenres.join(" ,") : "undefined"}
               </span>
             </li>
             <li>
@@ -71,14 +71,16 @@ export default function card({data, data2}) {
               <span>{rating}</span>
             </li>
           </ul>
-          <div className={styles.containerBtnShow}>
-            <div className={styles.btmSow}>
-              <button>show more </button>
-              <span>
-                <SlArrowRight />
-              </span>
+          <Link to={`/detail/${id}`} style={{ textDecoration: "none" }}>
+            <div className={styles.containerBtnShow}>
+              <div className={styles.btmSow}>
+                <button>show more </button>
+                <span>
+                  <SlArrowRight />
+                </span>
+              </div>
             </div>
-          </div>
+          </Link>
         </article>
       </div>
     </div>

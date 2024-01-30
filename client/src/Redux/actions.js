@@ -6,9 +6,10 @@ import {
   DELETEPLATFORMS,
   GENRES,
   DELETEGENRES,
-} from './types';
-import axios from 'axios';
-import store from './store';
+  USER,
+} from "./types";
+import axios from "axios";
+import store from "./store";
 
 export function access(payload) {
   return {
@@ -27,10 +28,10 @@ async function dataCard(memoriPag, payload) {
 
   while (retries > 0 && arrayPag.length !== 3) {
     try {
-      const {data} = await axios(
-        `http://localhost:3001/videogames/${numRandom()}`,
+      const { data } = await axios(
+        `http://localhost:3001/videogames/${numRandom()}`
       );
-      arrayPag.push({data});
+      arrayPag.push({ data });
       memoriPag[payload] = arrayPag;
       retries = 3;
     } catch (error) {
@@ -69,15 +70,15 @@ export function idRandom(payload) {
 
 export function classGenres(payload) {
   return async (dispatch) => {
-    if (payload === 'delete') {
+    if (payload === "delete") {
       return dispatch({
         type: CLASSFILTER,
         payload: {},
       });
     }
-    if (payload === 'Top Rated' || payload === 'Lowest Rated') {
-      const {data} = await axios(
-        `http://localhost:3001/filter/?ratings=${payload}`,
+    if (payload === "Top Rated" || payload === "Lowest Rated") {
+      const { data } = await axios(
+        `http://localhost:3001/filter/?ratings=${payload}`
       );
       if (data) {
         let memori = {};
@@ -94,9 +95,9 @@ export function classGenres(payload) {
         });
       }
     }
-    if (payload === 'name' || payload === '-name') {
-      const {data} = await axios(
-        ` http://localhost:3001/filter/?name=${payload}`,
+    if (payload === "name" || payload === "-name") {
+      const { data } = await axios(
+        ` http://localhost:3001/filter/?name=${payload}`
       );
       let memori = {};
       let min = 0;
@@ -112,8 +113,8 @@ export function classGenres(payload) {
       });
     }
 
-    const {data} = await axios(
-      `http://localhost:3001/filter?genres=${payload}`,
+    const { data } = await axios(
+      `http://localhost:3001/filter?genres=${payload}`
     );
     let memori = {};
     let min = 0;
@@ -160,6 +161,13 @@ export function deleteGenres(payload) {
 
 export function submmit() {
   return {
-    type: 'SUBMIT',
+    type: "SUBMIT",
+  };
+}
+
+export function user(payload) {
+  return {
+    type: USER,
+    payload,
   };
 }

@@ -5,8 +5,129 @@
 }
 .imgDetail {
   width: 100%;
-  height: 500px;
+  height: 400px;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   border-radius: 5px;
+  opacity: 0.8;
+}
+.containerDetail {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.39);
+}
+.detail1 {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+.name {
+  display: flex;
+  flex-direction: column;
+}
+.name div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 20px;
+}
+.name h1 {
+  font-size: 74px;
+  margin: 0;
+  padding-left: 20px;
+}
+.name div span {
+  padding: 0;
+  margin-right: 10%;
+  border-radius: 5px;
+  border: 2px solid rgb(15, 192, 15);
+}
+.name div p {
+  margin: 0;
+  margin-left: 20px;
+  background-color: rgba(112, 112, 111, 0.726);
+  border-radius: 5px;
+  padding-inline: 5px;
+}
+.detail2 {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+.percentage {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  height: 40px;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+.ratings {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.contentRatings {
+  padding-top: 7px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.contentRatings .Ratings1 {
+  font-size: 20px;
+}
+.more {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  margin-bottom: 50px;
+}
+.more1 {
+  display: flex;
+  flex-direction: column;
+}
+.more1 p {
+  margin: 0;
+}
+.more1 h3 {
+  color: rgba(255, 255, 255, 0.26);
+}
+.moreP {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.moreP p {
+  margin: 0;
+}
+
+.detail2 {
+  width: 38%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.imgP img {
+  width: 100%;
+}
+
+.imgPlus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.imgPlus img {
+  width: 49%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.imgPlus img:hover {
+  transform: scale(1.3);
+  z-index: 1;
+  border-radius: 10px;
 }

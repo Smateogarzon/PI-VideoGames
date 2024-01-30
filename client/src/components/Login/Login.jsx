@@ -1,22 +1,22 @@
-import axios from 'axios';
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {access} from '../../Redux/actions';
-import styles from './Login.module.css';
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { access, user } from "../../Redux/actions";
+import styles from "./Login.module.css";
 
 export default function login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState(false);
-  const [tipeError, setTipeError] = useState('');
+  const [tipeError, setTipeError] = useState("");
   const [log, setLog] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleChange = (event) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     setLog((prevLogin) => ({
       ...prevLogin,
       [name]: value,
@@ -26,21 +26,22 @@ export default function login() {
   const submmit = async (e) => {
     e.preventDefault();
     try {
-      const {data} = await axios.post('http://localhost:3001/login', log, {
+      const { data } = await axios.post("http://localhost:3001/login", log, {
         withCredentials: true,
       });
       if (data.access === true) {
         setLog({
-          email: '',
-          password: '',
+          email: "",
+          password: "",
         });
         dispatch(access(true));
+        dispatch(user(data.userName));
         setError(false);
-        navigate('/');
+        navigate("/");
       }
     } catch (error) {
       const values = Object.values(error.response.data);
-      setTipeError(values.join(' , '));
+      setTipeError(values.join(" , "));
       setError(true);
     }
   };

@@ -1,41 +1,41 @@
-import axios from 'axios';
-import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import styles from './Sign_Up.module.css';
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./Sign_Up.module.css";
 
 export default function singUp() {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
-  const [tipeError, setTipeError] = useState('');
+  const [tipeError, setTipeError] = useState("");
   const [dataUser, setDateUser] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setDateUser((prevData) => ({...prevData, [name]: value}));
+    const { name, value } = e.target;
+    setDateUser((prevData) => ({ ...prevData, [name]: value }));
   };
   const submmit = async (e) => {
     e.preventDefault();
     try {
-      const {data} = await axios.post(
-        'http://localhost:3001/create_user',
-        dataUser,
+      const { data } = await axios.post(
+        "http://localhost:3001/create_user",
+        dataUser
       );
       if (data.register === true) {
         setDateUser({
-          username: '',
-          email: '',
-          password: '',
+          username: "",
+          email: "",
+          password: "",
         });
         setError(false);
-        navigate('/login');
+        navigate("/login");
       }
     } catch (error) {
-      if (typeof error.response.data === 'object') {
+      if (typeof error.response.data === "object") {
         const values = Object.values(error.response.data);
-        setTipeError(values.join(' ,'));
+        setTipeError(values.join(" ,"));
         setError(true);
       } else {
         setTipeError(error.response.data);
@@ -43,7 +43,7 @@ export default function singUp() {
       }
     }
   };
-  console.log(tipeError);
+
   return (
     <div className={styles.container}>
       <form>

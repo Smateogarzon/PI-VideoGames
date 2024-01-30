@@ -5,3 +5,4 @@ export const PLATFORM = "PLATFORM";
 export const DELETEPLATFORMS = "DELETEPLATFORMS";
 export const GENRES = "GENRES";
 export const DELETEGENRES = "DELETEGENRES";
+export const USER = "USER";

@@ -1,14 +1,15 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { access, user } from "../../Redux/actions";
-import SearchResults from "./SearchResults";
-import styles from "./SearchBar.module.css";
+import axios from 'axios';
+import {useState, useEffect} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
+import {access, user} from '../../Redux/actions';
+import SearchResults from './SearchResults';
+import styles from './SearchBar.module.css';
 
 export default function searchBar() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const [results, setResults] = useState([]);
   const [cancelToken, setCancelToken] = useState(null);
   const admision = useSelector((state) => state.access);
@@ -24,7 +25,7 @@ export default function searchBar() {
 
   const handleChange = async (event) => {
     try {
-      const { value } = event.target;
+      const {value} = event.target;
       setSearchValue(value);
 
       // Cancelar la solicitud anterior
@@ -36,9 +37,9 @@ export default function searchBar() {
       const newCancelToken = axios.CancelToken.source();
       setCancelToken(newCancelToken);
 
-      const { data } = await axios.get(
+      const {data} = await axios.get(
         `http://localhost:3001/videogames/?name=${value}`,
-        { withCredentials: true, cancelToken: newCancelToken.token }
+        {withCredentials: true, cancelToken: newCancelToken.token},
       );
 
       setResults(data);
@@ -52,29 +53,33 @@ export default function searchBar() {
 
   const pressKeys = (event) => {
     if (event.altKey && event.ctrlKey) {
-      if (document.activeElement.tagName !== "INPUT") {
-        document.getElementById("search-bar").focus();
+      if (document.activeElement.tagName !== 'INPUT') {
+        document.getElementById('search-bar').focus();
       }
     }
   };
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:3001/logout");
+      await axios.post('http://localhost:3001/logout');
       dispatch(access(false));
-      dispatch(user(""));
+      dispatch(user(''));
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", pressKeys);
+    document.addEventListener('keydown', pressKeys);
     return () => {
-      document.removeEventListener("keydown", pressKeys);
+      document.removeEventListener('keydown', pressKeys);
     };
   }, []);
-
+  const clearSearch = () => {
+    setSearchValue('');
+    setResults([]);
+  };
   return (
     <div className={styles.containerSearch}>
       <div className={styles.containerSearchBar}>
@@ -84,10 +89,12 @@ export default function searchBar() {
             type="search"
             id="search-bar"
             value={searchValue}
-            placeholder={" Search +800,000 games"}
+            placeholder={' Search +800,000 games'}
             onChange={handleChange}
           />
-          {results.length > 0 && <SearchResults data={results} />}
+          {results.length > 0 && (
+            <SearchResults data={results} clearSearch={clearSearch} />
+          )}
         </div>
 
         <div className={styles.containerKey}>
@@ -99,11 +106,11 @@ export default function searchBar() {
 
       {!admision && (
         <div className={styles.containerSession}>
-          <Link to={"/login"} style={{ textDecoration: "none" }}>
+          <Link to={'/login'} style={{textDecoration: 'none'}}>
             <span>LOG IN</span>
           </Link>
 
-          <Link to={"/sing_up"} style={{ textDecoration: "none" }}>
+          <Link to={'/sing_up'} style={{textDecoration: 'none'}}>
             <span>SIGN UP</span>
           </Link>
         </div>
@@ -111,12 +118,11 @@ export default function searchBar() {
       {admision && (
         <div className={styles.containerSession}>
           <Link
-            to={"/profile"}
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            <span style={{ cursor: "pointer" }}>Your Profile</span>
+            to={'/profile'}
+            style={{textDecoration: 'none', color: 'white'}}>
+            <span style={{cursor: 'pointer'}}>Your Profile</span>
           </Link>
-          <span onClick={logout} style={{ cursor: "pointer" }}>
+          <span onClick={logout} style={{cursor: 'pointer'}}>
             Log Out
           </span>
         </div>

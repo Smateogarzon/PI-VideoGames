@@ -1,16 +1,16 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import styles from "./Detail.module.css";
+import {useParams} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
+import styles from './Detail.module.css';
 
 export default function detail() {
   const [videogame, setVideogame] = useState({});
   const [render, setRender] = useState(false);
-  const { id } = useParams();
+  const {id} = useParams();
   useEffect(() => {
     axios
       .get(`http://localhost:3001/videogames/${id}`)
-      .then(({ data }) => {
+      .then(({data}) => {
         if (data.name) {
           setVideogame(data);
           setRender(true);
@@ -22,90 +22,92 @@ export default function detail() {
       setRender(false);
     };
   }, [id]);
-
+  console.log(videogame);
   return (
     render && (
       <div className={styles.container}>
         <div
           className={styles.imgDetail}
-          style={{ backgroundImage: `url(${videogame.background_image})` }}
-        ></div>
+          style={{backgroundImage: `url(${videogame.background_image})`}}></div>
         <section className={styles.containerDetail}>
           <article className={styles.detail1}>
             <div className={styles.name}>
               <div>
-                <p>
-                  updated:{" "}
-                  {convertirFormatoFecha(videogame.updated.substring(0, 10))}
-                </p>
+                {videogame.updated && (
+                  <p>
+                    updated:{' '}
+                    {convertirFormatoFecha(videogame.updated.substring(0, 10))}
+                  </p>
+                )}
                 <span>{videogame.metacritic}</span>
               </div>
               <h1>{videogame.name}</h1>
             </div>
             <div>
-              <div className={styles.percentage}>
-                {videogame.ratings.map((e, i) => {
-                  const isFirst = i === 0;
-                  const isLast = i === videogame.ratings.length - 1;
+              {videogame.ratings && (
+                <div className={styles.percentage}>
+                  {videogame.ratings.map((e, i) => {
+                    const isFirst = i === 0;
+                    const isLast = i === videogame.ratings.length - 1;
 
-                  let borderRadiusStyle = {};
-                  if (isFirst) {
-                    borderRadiusStyle = {
-                      borderTopLeftRadius: "5px",
-                      borderBottomLeftRadius: "5px",
-                    };
-                  } else if (isLast) {
-                    borderRadiusStyle = {
-                      borderTopRightRadius: "5px",
-                      borderBottomRightRadius: "5px",
-                    };
-                  }
+                    let borderRadiusStyle = {};
+                    if (isFirst) {
+                      borderRadiusStyle = {
+                        borderTopLeftRadius: '5px',
+                        borderBottomLeftRadius: '5px',
+                      };
+                    } else if (isLast) {
+                      borderRadiusStyle = {
+                        borderTopRightRadius: '5px',
+                        borderBottomRightRadius: '5px',
+                      };
+                    }
 
-                  let backgroundColor;
-                  switch (e.title) {
-                    case "exceptional":
-                      backgroundColor = "green";
-                      break;
-                    case "recommended":
-                      backgroundColor = "blue";
-                      break;
-                    case "meh":
-                      backgroundColor = "yellow";
-                      break;
-                    default:
-                      backgroundColor = "red";
-                  }
+                    let backgroundColor;
+                    switch (e.title) {
+                      case 'exceptional':
+                        backgroundColor = 'green';
+                        break;
+                      case 'recommended':
+                        backgroundColor = 'blue';
+                        break;
+                      case 'meh':
+                        backgroundColor = 'yellow';
+                        break;
+                      default:
+                        backgroundColor = 'red';
+                    }
 
-                  return (
-                    <span
-                      key={i}
-                      style={{
-                        width: `${e.percent}%`,
-                        height: "100%",
-                        backgroundColor,
-                        ...borderRadiusStyle,
-                      }}
-                    ></span>
-                  );
-                })}
-              </div>
+                    return (
+                      <span
+                        key={i}
+                        style={{
+                          width: `${e.percent}%`,
+                          height: '100%',
+                          backgroundColor,
+                          ...borderRadiusStyle,
+                        }}></span>
+                    );
+                  })}
+                </div>
+              )}
 
-              {render && (
+              {render && videogame.ratings && (
                 <div className={styles.ratings}>
                   {videogame.ratings.map((elemt, i) => {
                     let backgroundColor;
                     switch (elemt.title) {
-                      case "exceptional":
-                        backgroundColor = "green";
+                      case 'exceptional':
+                        backgroundColor = 'green';
                         break;
-                      case "recommended":
-                        backgroundColor = "blue";
+                      case 'recommended':
+                        backgroundColor = 'blue';
                         break;
-                      case "meh":
-                        backgroundColor = "yellow";
+                      case 'meh':
+                        backgroundColor = 'yellow';
                         break;
                       default:
-                        backgroundColor = "red";
+                        backgroundColor = 'red';
                     }
                     return (
                       <div key={i} className={styles.contentRatings}>
@@ -113,8 +115,7 @@ export default function detail() {
                           className={styles.Ratings1}
                           style={{
                             borderBottom: `2px solid ${backgroundColor}`,
-                          }}
-                        >
+                          }}>
                           {elemt.title}:
                         </span>
                         <span className={styles.Ratings2}>{elemt.count}</span>
@@ -123,15 +124,15 @@ export default function detail() {
                   })}
                 </div>
               )}
-              <h2 style={{ paddingLeft: "20px", marginTop: "25px" }}>About</h2>
+              <h2 style={{paddingLeft: '20px', marginTop: '25px'}}>About</h2>
               <div
-                dangerouslySetInnerHTML={{ __html: videogame.description }}
+                dangerouslySetInnerHTML={{__html: videogame.description}}
                 style={{
-                  textWrap: "balance",
-                  textAlign: "justify",
-                  paddingLeft: "20px",
-                  margin: "0",
-                  width: "95%",
+                  textWrap: 'balance',
+                  textAlign: 'justify',
+                  paddingLeft: '20px',
+                  margin: '0',
+                  width: '95%',
                 }}
               />
               <div className={styles.more}>
@@ -139,37 +140,49 @@ export default function detail() {
                   <h3>Platforms</h3>
                   <div className={styles.moreP}>
                     {render &&
-                      videogame.platforms.map((e, i) => (
-                        <p key={i}>{e.platform.name} / </p>
+                      (typeof videogame.platforms[0] === 'string' ? (
+                        <p>{videogame.platforms.join(' / ')}</p>
+                      ) : (
+                        videogame.platforms.map((e, i) => (
+                          <p key={i}>{e.platform.name} / </p>
+                        ))
                       ))}
                   </div>
 
                   <h3>Release date</h3>
                   <p>{convertirFormatoFecha(videogame.released)}</p>
                   <h3>Publisher</h3>
-                  <div className={styles.moreP}>
-                    {render &&
-                      videogame.publishers.map((e, i) => (
-                        <p key={i}>{e.name} / </p>
-                      ))}
-                  </div>
+                  {videogame.publishers && (
+                    <div className={styles.moreP}>
+                      {render &&
+                        videogame.publishers.map((e, i) => (
+                          <p key={i}>{e.name} / </p>
+                        ))}
+                    </div>
+                  )}
                 </div>
                 <div className={styles.more1}>
                   <h3>Genres</h3>
                   <div className={styles.moreP}>
                     {render &&
-                      videogame.genres.map((e, i) => (
-                        <p key={i}> {e.name} / </p>
+                      (typeof videogame.genres[0] === 'string' ? (
+                        <p>{videogame.genres.join(' / ')}</p>
+                      ) : (
+                        videogame.genres.map((e, i) => (
+                          <p key={i}> {e.name} / </p>
+                        ))
                       ))}
                   </div>
 
                   <h3>Developers</h3>
-                  <div className={styles.moreP}>
-                    {render &&
-                      videogame.developers.map((e, i) => (
-                        <p key={i}>{e.name} /</p>
-                      ))}
-                  </div>
+                  {videogame.developers && (
+                    <div className={styles.moreP}>
+                      {render &&
+                        videogame.developers.map((e, i) => (
+                          <p key={i}>{e.name} /</p>
+                        ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -180,19 +193,23 @@ export default function detail() {
                 src={videogame.background_image_additional}
                 alt={videogame.name}
               />
-              <div className={styles.imgPlus}>
-                {videogame.screenshots_count.map((e, i) => (
-                  <img key={i} src={e} alt={i} />
-                ))}
-              </div>
+              {videogame.screenshots_count && (
+                <div className={styles.imgPlus}>
+                  {videogame.screenshots_count.map((e, i) => (
+                    <img key={i} src={e} alt={i} />
+                  ))}
+                </div>
+              )}
             </div>
             <div className={styles.more1}>
               <h3>Tags</h3>
-              <div className={styles.moreP}>
-                {videogame.tags.map((e, i) => (
-                  <span key={i}>{e.name} /</span>
-                ))}
-              </div>
+              {videogame.tags && (
+                <div className={styles.moreP}>
+                  {videogame.tags.map((e, i) => (
+                    <span key={i}>{e.name} /</span>
+                  ))}
+                </div>
+              )}
             </div>
           </article>
         </section>
@@ -203,18 +220,18 @@ export default function detail() {
 
 function convertirFormatoFecha(fechaString) {
   const meses = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   const fecha = new Date(fechaString);

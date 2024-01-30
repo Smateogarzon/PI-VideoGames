@@ -13,7 +13,6 @@ async function getNameVideoGame(req, res) {
     }
     // Contar la cantidad de videojuegos en la base de datos
     const count = await videogame.count();
-
     if (count) {
       try {
         // Buscar videojuegos en la base de datos que coincidan con el nombre
@@ -34,12 +33,18 @@ async function getNameVideoGame(req, res) {
         }
 
         // Mapear los nombres encontrados en la base de datos
-        const finalName = nameDb.map((game) => ({
-          id: game.id,
-          name: game.name,
-          image: game.background_image,
-          platforms: game.platforms.map((platform) => platform.platform.name),
-        }));
+        const finalName = nameDb.map((game) => {
+          console.log('Datos de game:', game);
+          const mappedData = {
+            id: game.id,
+            name: game.name,
+            image: game.background_image,
+            platforms: game.platforms.map((platform) => platform),
+          };
+          console.log('Datos mapeados:', mappedData);
+          return mappedData;
+        });
+        console.log(finalName);
         res.cookie('miCookie', 'valorDeLaCookie', {
           sameSite: 'None',
           secure: true,

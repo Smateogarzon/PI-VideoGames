@@ -10,6 +10,7 @@ const logout = require('../controllers/Logout');
 const getUserVideoGames = require('../controllers/GetVideoGameCreated');
 const getLibrary = require('../controllers/GetVideoGamesLibrary');
 const getGenerFilter = require('../controllers/GetGenerFilter');
+const deleteLibrary = require('../controllers/DeleteLibrary');
 
 const router = Router();
 
@@ -22,7 +23,8 @@ router.get('/videogames', getNameVideoGame);
 router.post('/login', login);
 router.post('/create_videogames', postVideoGame);
 router.post('/create_user', PostUser);
-router.post('/add_library/:id', postLibrary);
+router.post('/add_library/:idn', postLibrary);
 router.post('/logout', logout);
+router.delete('/delete_library/:id', deleteLibrary);
 
 module.exports = router;

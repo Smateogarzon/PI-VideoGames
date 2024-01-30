@@ -1,13 +1,16 @@
-const { DataTypes } = require("sequelize");
+const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) => {
   const library = sequelize.define(
-    "library",
+    'library',
     {
-      id: {
+      id_p: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+      },
+      id: {
+        type: DataTypes.INTEGER,
       },
       name: {
         type: DataTypes.STRING,
@@ -69,7 +72,7 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false,
-    }
+    },
   );
 
   return library;

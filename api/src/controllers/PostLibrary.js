@@ -6,13 +6,14 @@ const axios = require('axios');
 // Maneja la solicitud para agregar un videojuego a la biblioteca del usuario
 async function postLibrary(req, res) {
   try {
-    const {id} = req.params;
+    const {idn} = req.params;
 
     // Buscar el videojuego en la base de datos local
-    const videogameDb = await videogame.findOne({where: {id: id}});
+    const videogameDb = await videogame.findOne({where: {id: idn}});
 
     if (videogameDb) {
       const {
+        id,
         name,
         description,
         platforms,
@@ -50,6 +51,7 @@ async function postLibrary(req, res) {
 
       // Si el videojuego no está en la biblioteca local, agregarlo
       const vLibrary = await library.create({
+        id: id,
         name: name,
         description: description,
         platforms: platforms,
@@ -69,8 +71,9 @@ async function postLibrary(req, res) {
     }
 
     // Si el videojuego no está en la base de datos local, buscarlo en la API externa
-    const {data} = await axios(`${URL_GET}/${id}?key=${API_KEY}`);
+    const {data} = await axios(`${URL_GET}/${idn}?key=${API_KEY}`);
     const {
+      id,
       name,
       description,
       platforms,
@@ -109,6 +112,7 @@ async function postLibrary(req, res) {
 
     // Si el videojuego no está en la biblioteca local, agregarlo
     const vLibrary = await library.create({
+      id: id,
       name: name,
       description: description,
       platforms: platformsArray,

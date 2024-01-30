@@ -7,6 +7,7 @@ import {
   GENRES,
   DELETEGENRES,
   USER,
+  LIBRARY,
 } from "./types";
 import axios from "axios";
 import store from "./store";
@@ -170,4 +171,8 @@ export function user(payload) {
     type: USER,
     payload,
   };
+}
+
+export function lib() {
+  return async (dispatch) => {};
 }

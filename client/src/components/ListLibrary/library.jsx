@@ -1,14 +1,14 @@
-import {useEffect, useState} from 'react';
-import axios from 'axios';
-import Card from '../Home/Cards/Card';
-import {LoaderMax} from '../lo/Loader';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "../Home/Cards/Card";
+import { LoaderMax } from "../lo/Loader";
 export default function library() {
   const [library, setLibrary] = useState([]);
   const [loader, setLoader] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get('http://localhost:3001/library', {
+        const { data } = await axios.get("http://localhost:3001/library", {
           withCredentials: true,
         });
         setLibrary(data);
@@ -30,7 +30,7 @@ export default function library() {
       ) : (
         <div>
           {library.map((e, i) => (
-            <Card data2={e} key={i} />
+            <Card data2={e} key={i} library={true} />
           ))}
         </div>
       )}

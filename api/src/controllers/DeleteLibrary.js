@@ -1,6 +1,6 @@
-const {library} = require('../db');
+const { library } = require("../db");
 async function deleteLibrary(req, res) {
-  const {id} = req.params;
+  const { id } = req.params;
 
   library
     .destroy({
@@ -12,7 +12,7 @@ async function deleteLibrary(req, res) {
       res.sendStatus(200);
     })
     .catch((err) => {
-      res.status(500).send({Error: err.message});
+      res.status(500).send({ Error: err.message });
     });
 }
 

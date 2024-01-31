@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+  display: flex;
+}
+.container1 {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}

@@ -22,7 +22,7 @@ export default function detail() {
       setRender(false);
     };
   }, [id]);
-  console.log(videogame);
+
   return (
     render && (
       <div className={styles.container}>

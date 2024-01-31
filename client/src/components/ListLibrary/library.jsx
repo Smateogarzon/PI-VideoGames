@@ -1,36 +1,27 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Card from "../Home/Cards/Card";
-import { LoaderMax } from "../lo/Loader";
+import {useEffect, useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import axios from 'axios';
+import Card from '../Home/Cards/Card';
+import {LoaderMax} from '../lo/Loader';
+import {lib} from '../../Redux/actions';
+import styles from './library.module.css';
+
 export default function library() {
-  const [library, setLibrary] = useState([]);
+  const dispatch = useDispatch();
+  const library = useSelector((state) => state.lib);
   const [loader, setLoader] = useState(true);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:3001/library", {
-          withCredentials: true,
-        });
-        setLibrary(data);
-        setLoader(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-    return () => {
-      setLoader(true);
-      setLibrary([]);
-    };
+    dispatch(lib());
+    setLoader(false);
   }, []);
   return (
-    <div>
+    <div className={styles.container}>
       {loader ? (
         <LoaderMax />
       ) : (
-        <div>
+        <div className={styles.container1}>
           {library.map((e, i) => (
-            <Card data2={e} key={i} library={true} />
+            <Card data2={e} key={i} libState={true} />
           ))}
         </div>
       )}

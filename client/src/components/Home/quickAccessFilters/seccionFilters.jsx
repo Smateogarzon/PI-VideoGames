@@ -54,23 +54,10 @@ export default function SeccionFilters() {
       </Link>
 
       <Link
-        to={Access ? '/createVideoGame' : '/'}
+        to={Access && '/createVideoGame'}
         style={{textDecoration: 'none', color: 'white'}}
         onClick={Access ? null : notify}>
         <h2>Create Video Game</h2>{' '}
-        <ToastContainer
-          position="top-center"
-          autoClose={4000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-          transition={Bounce}
-        />
       </Link>
       <div className={styles.containerFilters}>
         <h2>Genres</h2>
